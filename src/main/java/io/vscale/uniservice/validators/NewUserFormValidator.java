@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  * @author Andrey Romanov
  * @version 1.0
  */
+@Component
 public class NewUserFormValidator implements Validator{
 
     private UserRepository userRepository;

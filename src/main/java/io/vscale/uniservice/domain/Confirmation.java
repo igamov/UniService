@@ -22,6 +22,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 
+import java.util.List;
 import java.util.Set;
 
 /**

@@ -21,6 +21,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -69,8 +70,8 @@ public class FileOfService {
                inverseJoinColumns = @JoinColumn(name = "cooperator_id"))
     private Set<Cooperator> cooperators;
 
-    @OneToMany(mappedBy = "confirmation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Confirmation> confirmations;
+    @OneToMany(mappedBy = "fileOfService", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Confirmation> confirmations;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "file_to_organization",
