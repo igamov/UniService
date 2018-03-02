@@ -29,8 +29,8 @@ import java.util.Date;
 @Builder
 @EqualsAndHashCode
 @ToString
-@Entity(name = "Confirmation")
-@Table(name = "confirmation")
+@Entity(name = "ConfirmationLimits")
+@Table(name = "confirmation_limits")
 public class ConfirmationLimits {
 
     @Id
