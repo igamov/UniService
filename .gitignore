@@ -89,7 +89,6 @@ hs_err_pid*
 
 #Front-end
 /node_modules/
-/dist
 /.git/
 /**/_backstage
 /**/Thumbs.db
