@@ -20,6 +20,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -50,6 +51,7 @@ public class Event {
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String description;
 
+    @CreationTimestamp
     @Column(name = "creation_date", nullable = false)
     private Timestamp timestamp;
 
@@ -65,16 +67,16 @@ public class Event {
                inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Set<Student> students;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(name = "file_to_event",
+            joinColumns = @JoinColumn(name = "event_file_id"),
+            inverseJoinColumns = @JoinColumn(name = "file_id"))
+    private Set<FileOfService> files;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "event_manager",
                joinColumns = @JoinColumn(name = "manage_event_id"),
                inverseJoinColumns = @JoinColumn(name = "manager_id"))
     private Set<Profile> managers;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinTable(name = "file_to_event",
-               joinColumns = @JoinColumn(name = "event_file_id"),
-               inverseJoinColumns = @JoinColumn(name = "file_id"))
-    private Set<FileOfService> files;
 
 }

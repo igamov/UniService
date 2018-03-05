@@ -18,5 +18,6 @@ public interface ConfirmationRepository extends JpaRepository<Confirmation, Long
     List<Confirmation> findAllByDescription(String description);
     List<Confirmation> findAllByFileOfService(FileOfService file);
     List<Confirmation> findAllByProfile(Profile profile);
+    Confirmation findOneByFileOfService(FileOfService file);
 
 }

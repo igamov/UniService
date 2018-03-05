@@ -14,5 +14,6 @@ import java.util.List;
 public interface UserService {
 
     List<User> getUsersByRole(RoleType roleType);
+    User getUserByLogin(String login);
 
 }

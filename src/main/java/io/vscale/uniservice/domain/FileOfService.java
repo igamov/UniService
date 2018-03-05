@@ -35,8 +35,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EqualsAndHashCode(exclude = {"events"})
-@ToString(exclude = {"events"})
+@EqualsAndHashCode(exclude = {"confirmations", "organizations", "cooperators", "events"})
+@ToString(exclude = {"confirmations", "organizations", "cooperators", "events"})
 @Entity(name = "FileOfService")
 @Table(name = "files_of_service")
 public class FileOfService {
@@ -58,10 +58,7 @@ public class FileOfService {
     @Column(columnDefinition = "TEXT", name = "url", nullable = false)
     private String url;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "file_to_event",
-               joinColumns = @JoinColumn(name = "file_id"),
-               inverseJoinColumns = @JoinColumn(name = "event_file_id"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "files")
     private Set<Event> events;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
@@ -70,7 +67,7 @@ public class FileOfService {
                inverseJoinColumns = @JoinColumn(name = "cooperator_id"))
     private Set<Cooperator> cooperators;
 
-    @OneToMany(mappedBy = "fileOfService", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "fileOfService", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Confirmation> confirmations;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

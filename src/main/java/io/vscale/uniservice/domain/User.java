@@ -62,7 +62,7 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Profile profile;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_to_role",
                joinColumns = @JoinColumn(name = "existed_user_id"),
                inverseJoinColumns = @JoinColumn(name = "existed_role_id"))

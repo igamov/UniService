@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,6 +47,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
              .antMatchers("/js/**").permitAll()
              .antMatchers("/fonts/**").permitAll()
              .antMatchers("/").permitAll()
+             .antMatchers("/api_v1/check_user").permitAll()
+             .antMatchers("/api_v1/admin/**").hasAuthority("ADMIN")
+             .antMatchers(HttpMethod.GET, "/api_v1/student/show/**").hasAuthority("STUDENT")
+             .antMatchers(HttpMethod.POST, "/api_v1/student/change/**").hasAuthority("STUDENT")
+             .antMatchers("/api_v1/cooperator/**").hasAuthority("COOPERATOR")
              .anyRequest().authenticated()
             .and()
              .formLogin().loginPage("/login")
@@ -58,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
              .logoutUrl("/logout")
              .deleteCookies("remember-me")
              .logoutSuccessUrl("/login")
-             .permitAll();
+             .permitAll()
+            .and()
+             .csrf()
+             .disable();
 
     }
 

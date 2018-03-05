@@ -55,7 +55,7 @@ public class Confirmation {
     private Profile profile;
 
     @ManyToOne(cascade  = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "confirm_file_id")
+    @JoinColumn(name = "con_file_id")
     private FileOfService fileOfService;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

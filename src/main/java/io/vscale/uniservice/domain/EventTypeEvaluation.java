@@ -17,9 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.JoinTable;
 import java.util.List;
 
 /**
@@ -53,10 +51,7 @@ public class EventTypeEvaluation {
     @Column(name = "end_value", nullable = false)
     private Byte endValue;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "event_to_type",
-               joinColumns = @JoinColumn(name = "type_id"),
-               inverseJoinColumns = @JoinColumn(name = "event_id"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "eventTypeEvaluations")
     private List<Event> events;
 
 }

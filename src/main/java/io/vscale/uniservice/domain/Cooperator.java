@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
@@ -51,7 +51,7 @@ public class Cooperator {
     @Column(name = "appointment", columnDefinition = "TEXT")
     private String appointment;
 
-    @ManyToOne(cascade  = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
     private Profile profile;
 

@@ -1,5 +1,6 @@
 package io.vscale.uniservice.repositories;
 
+import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.EventTypeEvaluation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface EventTypeEvaluationRepository extends JpaRepository<EventTypeEvaluation, Long> {
     EventTypeEvaluation findByType(String string);
+    EventTypeEvaluation findByEventsContaining(Event event);
 }

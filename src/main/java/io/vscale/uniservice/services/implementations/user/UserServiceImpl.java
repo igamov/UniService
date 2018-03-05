@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +34,19 @@ public class UserServiceImpl implements UserService {
         return currentUsers.stream()
                            .filter(user -> user.getRoles().equals(roleType))
                            .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+
+        Optional<User> existedUser = this.userRepository.findByLogin(login);
+
+        if(!existedUser.isPresent()){
+            throw new NullPointerException("No such user!");
+        }
+
+        return existedUser.get();
 
     }
 

@@ -1,5 +1,6 @@
 package io.vscale.uniservice.repositories;
 
+import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.FileOfService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,4 +14,7 @@ import java.util.List;
  */
 public interface FileOfServiceRepository extends JpaRepository<FileOfService, Long> {
     List<FileOfService> findAllByType(String type);
+    FileOfService findOneById(Long id);
+    FileOfService findOneByEncodedName(String fileName);
+    FileOfService findByEventsContaining(Event event);
 }

@@ -1,12 +1,15 @@
 package io.vscale.uniservice.security.details;
 
+import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.security.states.UserState;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +33,7 @@ public class UserDetailsImpl implements UserDetails {
 
         return this.user.getRoles()
                         .stream()
-                        .map(role -> new SimpleGrantedAuthority(role.toString()))
+                        .map(roleType -> new SimpleGrantedAuthority(roleType.getRole().toString()))
                         .collect(Collectors.toList());
     }
 
@@ -46,17 +49,17 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !this.user.getState().equals(UserState.DELETED);
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !this.user.getState().equals(UserState.BANNED);
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !this.user.getState().equals(UserState.NOT_CONFIRMED);
+        return true;
     }
 
     @Override

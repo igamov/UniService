@@ -26,16 +26,22 @@ import java.util.Optional;
  * @version 1.0
  */
 @Component
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
-    private UserRepository userRepository;
-    private UserDetailsService userDetailsService;
+    private final UserRepository userRepository;
+
+    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public UserAuthenticationProvider(UserRepository userRepository, UserDetailsService userDetailsService) {
+        this.userRepository = userRepository;
+        this.userDetailsService = userDetailsService;
+    }
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
@@ -48,7 +54,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
         existedUser.ifPresent(user -> {
 
-            if(passwordEncoder.matches(password, user.getPassword())){
+            if(!passwordEncoder.matches(password, user.getPassword())){
 
                 if(passwordEncoder.matches(password, user.getToken())){
 
