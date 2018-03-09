@@ -42,11 +42,25 @@ body
 
 .content
     min-height: 100%
-    margin-bottom: -50px
+    margin-bottom: -70px
     &:after
         content: ""
         display: block
-        height: 50px
+        height: 70px
+
+header
+    box-shadow: 0 2px 10px 0 #ecf0f1
+    background-color: #ffffff
+
+.header-container
+    width: 80%
+    padding: 20px 0
+    margin: 0 auto
+    text-align: center
+
+footer
+    background-color: #122F3B
+    margin-top: 20px
 
 .footer-container
     height: 50px
@@ -57,21 +71,10 @@ body
         padding: 10px 0
         color: #b4b4b4
         font-size: 1em
-footer
-    background-color: #122F3B
-.header-container
-    width: 80%
-    padding-top: 5px
-    padding-bottom: 5px
-    margin: 0 auto
-    text-align: center
 
-header
-    box-shadow: 0 2px 10px 0 #ecf0f1
-    background-color: #ffffff
 
 .logo
-    font-size: 1.6em
+    font-size: 28px
     background: linear-gradient(90deg, #10B2DC 40%, #2CD3C8 50%)
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
@@ -79,23 +82,24 @@ header
     .top-logo
         display: block
         margin: 0 auto
-    .bottom-logo
-        float: left
 
 .panel
     background-color: #ffffff
     margin:
-        top: 30px
-    padding:
-        top: 20px
-        bottom: 20px
-        left: 40px
-        right: 40px
+        top: 25px
+    padding: 20px 100px
     text-align: center
     box-shadow: 0 3px 15px 0 #e6eaeb
 
+.welcome
+    .h1
+        font-weight: lighter
+    p
+        color: #8b8b8b
+        font-weight: lighter
+
 .input-box
-    padding: 10px 35px
+    padding: 10px 0
     position: relative
     input[type="text"], input[type="password"]
         width: 100%
@@ -113,16 +117,6 @@ header
         margin-left: 10px
         margin-top: -30px
         color: #23527c
-
-    input[type="submit"]
-        outline: none
-        border: none
-        width: 100%
-        height: 50px
-        background-color: #33B0DA
-        font-size: 1.3em
-        color: #ffffff
-        cursor: pointer
     .remember-me
         float: left
         margin-bottom: 20px
@@ -133,15 +127,71 @@ header
         height: 15px
         top: 3px
         position: relative
-.login-words
-    h1
-        font-weight: lighter
 
-    h3
-        color: #8b8b8b
-        font-weight: lighter
+button
+    display: inline-block
+    border: none
+    color: #fff
+    text-decoration: none
+    background-color: #33B0DA
+    padding: 15px 45px
+    font-size: 13px
+    text-transform: uppercase
+    font-weight: 600
+    letter-spacing: 3px
+    border-radius: 2px
+    text-align: center
+    position: relative
+    outline: none
+    width: 100%
+    transition: background-color .1s ease
+    &::after
+        transition: background-color .2s ease
+        position: absolute
+        content: ''
+        height: 4px
+        bottom: 0
+        width: 100%
+        background-color: darken(#33B0DA, 50%)
+        opacity: .18
+        border-bottom-left-radius: 2px
+        border-bottom-right-radius: 2px
+        left: 0
+    &:focus, &:hover
+        text-decoration: none
+        color: #fff
+    &:hover
+        background-color: lighten(#33B0DA, 5%)
+        &::after
+            opacity: .22
+    &:active
+        background-color: darken(#33B0DA, 5%)
+        &::after
+            opacity: .32
+
+.alert
+    margin: 10px 0
+    padding: 10px
+    background-color: rgba(#e74c3c, .6)
+    font-size: 13px
+    color: #ffffff
+    p
+        margin: 0
+
 .social-media
     float: right
+    a
+        font-size: 13px
+        color: #2c2c2c
+        display: block
+        background-color: rgba(#fff, .2)
+        height: 30px
+        line-height: 34px
+        text-align: center
+        width: 30px
+        border-radius: 10em
+        transition: background-color .25s ease
+
 
 nav
 	float: right
