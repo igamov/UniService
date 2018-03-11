@@ -51,27 +51,13 @@ body
 header
     box-shadow: 0 2px 10px 0 #ecf0f1
     background-color: #ffffff
+    height: 60px
 
 .header-container
     width: 80%
-    padding: 20px 0
     margin: 0 auto
     text-align: center
-
-footer
-    background-color: #122F3B
-    margin-top: 20px
-
-.footer-container
-    height: 50px
-    text-align: center
-    margin: 0 auto
-    width: 80%
-    .footer-text
-        padding: 10px 0
-        color: #b4b4b4
-        font-size: 1em
-
+    line-height: 60px
 
 .logo
     font-size: 28px
@@ -79,10 +65,52 @@ footer
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
     font-weight: 400
-    .top-logo
-        display: block
-        margin: 0 auto
 
+.main-logo
+    float: left
+
+ul
+    margin: 0
+    padding: 0
+    list-style: none
+    ul
+        display: none
+    li
+        display: inline-block
+        margin: 0 35px
+        padding: 0
+        position: relative
+        &:hover
+            ul
+                display: block
+                position: absolute
+                background-color: #ffffff
+                box-shadow: 0 2px 10px 0 #ecf0f1
+                padding: 0 25px
+                margin:
+                    top: 1px
+                li
+                    display: block
+                    float: left
+                    margin: 0
+                    a
+                        &:hover
+                            text-decoration: none
+                            color: $dark-accent-blue
+
+    a
+        color: #444
+        text-decoration: none
+        text-transform: uppercase
+        font-size: 14px
+        &:hover, &:focus
+            color: $dark-accent-blue
+            text-decoration: none
+        i
+            font-size: 14px
+            margin-right: 7px
+    .profile
+        float: right
 .panel
     background-color: #ffffff
     margin:
@@ -108,7 +136,7 @@ footer
         padding: 5px 5px 5px 35px
         color: #333333
         &:focus
-            outline-color: #23527c
+            outline-color: $dark-accent-blue
             color: #333333
     span
         position: relative
@@ -116,7 +144,7 @@ footer
         z-index: 2
         margin-left: 10px
         margin-top: -30px
-        color: #23527c
+        color: $dark-accent-blue
     .remember-me
         float: left
         margin-bottom: 20px
@@ -133,7 +161,7 @@ button
     border: none
     color: #fff
     text-decoration: none
-    background-color: #33B0DA
+    background-color: $button
     padding: 15px 45px
     font-size: 13px
     text-transform: uppercase
@@ -152,7 +180,7 @@ button
         height: 4px
         bottom: 0
         width: 100%
-        background-color: darken(#33B0DA, 50%)
+        background-color: darken($button, 50%)
         opacity: .18
         border-bottom-left-radius: 2px
         border-bottom-right-radius: 2px
@@ -161,7 +189,7 @@ button
         text-decoration: none
         color: #fff
     &:hover
-        background-color: lighten(#33B0DA, 5%)
+        background-color: lighten($button, 5%)
         &::after
             opacity: .22
     &:active
@@ -191,41 +219,19 @@ button
         width: 30px
         border-radius: 10em
         transition: background-color .25s ease
+footer
+    background-color: $footer
+    margin-top: 20px
 
-
-nav
-	float: right
-	ul
-		margin: 0
-		padding: 0
-		list-style: none
-	li
-		display: inline-block
-		margin-left: 70px
-		padding-top: 23px
-		position: relative
-	a
-		color: #444
-		text-decoration: none
-		text-transform: uppercase
-		font-size: 14px
-
-		&:hover
-			color: #000
-			text-decoration: none
-
-			&::before
-				width: 100%
-
-		&::before
-			content: ''
-			display: block
-			height: 5px
-			background-color: #444
-			position: absolute
-			top: 0
-			width: 0
-			transition: all ease-in-out 250ms
+.footer-container
+    height: 50px
+    text-align: center
+    margin: 0 auto
+    width: 80%
+    .footer-text
+        padding: 10px 0
+        color: #b4b4b4
+        font-size: 1em
 
 
 @import "media" // Всегда в конце
