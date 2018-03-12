@@ -3,6 +3,8 @@ package io.vscale.uniservice.repositories;
 import io.vscale.uniservice.domain.Group;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * 01.03.2018
  *
@@ -10,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0
  */
 public interface GroupRepository extends JpaRepository<Group, Long> {
+    Optional<Group> findByTitle(String title);
 }

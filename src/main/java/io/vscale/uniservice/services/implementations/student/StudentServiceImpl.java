@@ -35,4 +35,9 @@ public class StudentServiceImpl implements StudentService {
                               .collect(Collectors.toList());
 
     }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return this.studentRepository.findAll();
+    }
 }

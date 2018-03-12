@@ -20,7 +20,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/api_v1/student")
+@RequestMapping("/api_v1/student_role")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class StudentRESTController {
 

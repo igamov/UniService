@@ -2,7 +2,6 @@ package io.vscale.uniservice.security.rest.handlers;
 
 import io.vscale.uniservice.security.rest.errors.APIError;
 import io.vscale.uniservice.security.rest.exceptions.EntityNotFoundException;
-import io.vscale.uniservice.security.rest.exceptions.MovedTemporarilyException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
@@ -31,7 +31,7 @@ import javax.validation.ConstraintViolationException;
  * @author Andrey Romanov
  * @version 1.0
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
 
     @Override
@@ -209,6 +209,7 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
                                                                    WebRequest request){
 
         String error = "Для " + ex.getHttpMethod() + " " + ex.getRequestURL() + " не найден нужный контроллер. " +
+
                 "Введите его заново";
 
         APIError apiError = new APIError(HttpStatus.NOT_FOUND);
@@ -217,19 +218,6 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler{
         return new ResponseEntity<>(apiError, apiError.getStatus());
 
     }
-
-    @ExceptionHandler(MovedTemporarilyException.class)
-    public ResponseEntity<Object> handle302Page(MovedTemporarilyException ex){
-
-        String error = "Проблема с логином и паролем";
-
-        APIError apiError = new APIError(HttpStatus.FOUND);
-        apiError.setMessage(error);
-        apiError.setDebugMessage(ex.getMessage());
-        return new ResponseEntity<>(apiError, apiError.getStatus());
-
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request){
 

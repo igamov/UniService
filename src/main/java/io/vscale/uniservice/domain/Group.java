@@ -20,6 +20,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -49,6 +50,7 @@ public class Group {
     @Column(name = "title", columnDefinition = "VARCHAR(15)")
     private String title;
 
+    @CreationTimestamp
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
