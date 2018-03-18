@@ -54,7 +54,7 @@ header
     height: 60px
 
 .header-container
-    width: 80%
+    width: 77%
     margin: 0 auto
     text-align: center
     line-height: 60px
@@ -70,6 +70,7 @@ header
     float: left
 
 ul
+    float: right
     margin: 0
     padding: 0
     list-style: none
@@ -87,6 +88,7 @@ ul
                 background-color: #ffffff
                 box-shadow: 0 2px 10px 0 #ecf0f1
                 padding: 0 25px
+                z-index: 2
                 margin:
                     top: 1px
                 li
@@ -110,7 +112,7 @@ ul
             font-size: 14px
             margin-right: 7px
     .profile
-        float: right
+        margin-right: 5px
 .panel
     background-color: #ffffff
     margin:
@@ -232,6 +234,150 @@ footer
         padding: 10px 0
         color: #b4b4b4
         font-size: 1em
+.main-content
+    width: 80%
+    margin: 20px auto
+.filter-data
+    background-color: #ffffff
+    box-shadow: 0 2px 10px 0 #ecf0f1
+    padding: 20px
+
+.radio-button
+    text-align: left
+    vertical-align: top
+.control
+    font-size: 13px
+    position: relative
+    display: block
+    margin-bottom: 15px
+    padding-left: 30px
+    cursor: pointer
+    input
+        position: absolute
+        z-index: -1
+        opacity: 0
+
+.control_indicator
+    position: absolute
+    top: 2px
+    left: 0
+    width: 20px
+    height: 20px
+    background: #e6e6e6
+
+.control--radio
+    .control_indicator
+        border-radius: 50%
+
+.control:hover input ~ .control_indicator, .control input:focus ~ .control_indicator
+    background: #ccc
+.control input:checked ~ .control_indicator
+    background: #2aa1c0
+.control:hover input:not([disabled]):checked ~ .control_indicator, .control input:checked:focus ~ .control_indicator
+    background: #0e647d
+
+.control_indicator:after
+    position: absolute
+    display: none
+    content: ''
+.control input:checked ~ .control_indicator:after
+    display: block
+.control--radio .control_indicator:after
+    top: 7px
+    left: 7px
+    width: 6px
+    height: 6px
+    border-radius: 50%
+    background: #fff
+.control--radio input:disabled ~ .control__indicator:after
+    background: #7b7b7b
+
+/* Select */
+
+.select-box
+    h4
+        margin-bottom: 10px
+        margin-top: 5px
+.select
+    position: relative
+    display: inline-block
+    width: 100%
+    margin-bottom: 20px
+    font-family: $default-font
+    select
+        font-size: 14px
+        font-family: $default-font
+        display: inline-block
+        width: 100%
+        height: 40px
+        padding: 8px
+        cursor: pointer
+        color: #0e0e0e
+        border: 1px solid #d6d6d6
+        border-radius: 0
+        outline: 0
+        background: #fff
+        -webkit-appearance: none
+        -moz-appearance: none
+        appearance: none
+        &::-ms-expand
+            display: none
+        &:hover, &:focus
+            color: #000
+            background: #fff
+            cursor: pointer
+        &:disabled
+            pointer-events: none
+            opacity: .5
+        &:hover ~ .select__arrow, &:focus ~ .select__arrow
+            border-top-color: #000
+        &:disabled ~ .select__arrow, &:focus ~ .select__arrow
+            border-top-color: #ccc
+.select__arrow
+    position: absolute
+    top: 26px
+    right: 15px
+    width: 0
+    height: 0
+    pointer-events: none
+    border-width: 8px 5px 0 5px
+    border-style: solid
+    border-color: $dark-accent-blue transparent transparent transparent
+
+.h1
+    margin: 0
+    padding: 0
+    font-size: 26px
+    text-align: center
+
+.user-picture
+    width: 120px
+    height: auto
+
+.list-item
+    margin: 15px 0
+    background-color: #ffffff
+    box-shadow: 0 2px 10px 0 #ecf0f1
+    padding: 20px
+.user-data
+    font-size: 14px
+    margin: 0
+    .user-title
+        a
+            float: right
+            &:hover
+                outline: none
+                border: none
+                text-decoration: none
+        .name
+            display: inline-block
+            font-size: 18px
+            font-weight: bold
+    .course, .study, .group, .organization
+        display: flex
+        span
+            margin-right: 3px
+            color: #919191
 
 
 @import "media" // Всегда в конце

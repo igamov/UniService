@@ -1,3 +1,8 @@
-$(function() {
-    $('my-menu').mmenu();
+$('document').ready(function(){
+    $('#demo').jplist({
+        itemsBox: '.list'
+        ,itemPath: '.list-item'
+        ,panelPath: '.jplist-panel'
+    });
+
 });
