@@ -3,7 +3,7 @@ package io.vscale.uniservice.services.implementations.events;
 import io.vscale.uniservice.domain.Confirmation;
 import io.vscale.uniservice.domain.FileOfService;
 import io.vscale.uniservice.domain.Profile;
-import io.vscale.uniservice.repositories.ConfirmationRepository;
+import io.vscale.uniservice.repositories.data.ConfirmationRepository;
 import io.vscale.uniservice.services.interfaces.events.ConfirmationService;
 import org.springframework.stereotype.Service;
 

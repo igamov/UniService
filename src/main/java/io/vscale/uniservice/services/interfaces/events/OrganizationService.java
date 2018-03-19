@@ -3,6 +3,7 @@ package io.vscale.uniservice.services.interfaces.events;
 import io.vscale.uniservice.domain.Organization;
 import io.vscale.uniservice.domain.Student;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,5 +15,15 @@ import java.util.Set;
 public interface OrganizationService {
 
     Set<Student> getHeadOfOrganization(Organization organization);
+
+    List<Organization> findAll();
+
+    Organization findById(Long id);
+
+    void delete(Long id);
+
+    void delete(Organization organization);
+
+    void save(Organization organization);
 
 }

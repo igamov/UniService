@@ -1,7 +1,7 @@
 package io.vscale.uniservice.services.implementations.files;
 
 import io.vscale.uniservice.domain.FileOfService;
-import io.vscale.uniservice.repositories.FileOfServiceRepository;
+import io.vscale.uniservice.repositories.data.FileOfServiceRepository;
 import io.vscale.uniservice.services.interfaces.files.FileService;
 import io.vscale.uniservice.utils.FileStorageUtil;
 import lombok.SneakyThrows;

@@ -1,6 +1,6 @@
 package io.vscale.uniservice.services.interfaces.admin;
 
-import io.vscale.uniservice.forms.*;
+import io.vscale.uniservice.forms.rest.NewUserForm;
 
 
 /**
@@ -12,9 +12,5 @@ import io.vscale.uniservice.forms.*;
 public interface UserAdminService {
 
     void addNewUser(NewUserForm newUserForm);
-    void addProfileToUser(ProfileForm profileForm);
-    void makeStudent(StudentForm studentForm);
-    void makeCooperator(CooperatorForm cooperatorForm);
-    void addGroup(GroupForm groupForm);
 
 }

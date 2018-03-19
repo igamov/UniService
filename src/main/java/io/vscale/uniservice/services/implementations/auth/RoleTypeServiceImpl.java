@@ -1,7 +1,7 @@
 package io.vscale.uniservice.services.implementations.auth;
 
 import io.vscale.uniservice.domain.RoleType;
-import io.vscale.uniservice.repositories.RoleTypeRepository;
+import io.vscale.uniservice.repositories.data.RoleTypeRepository;
 import io.vscale.uniservice.services.interfaces.auth.RoleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -29,16 +29,13 @@ import javax.sql.DataSource;
 /**
  * 13.03.2018
  *
- * @author Andrey Romanov 
+ * @author Andrey Romanov
  * @version 1.0
  */
 @ComponentScan("io.vscale.uniservice")
 @EnableWebSecurity
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MultipleSecurityConfig {
-
-    private UserDetailsService userDetailsService;
-    private AuthenticationProvider authenticationProvider;
 
     @Qualifier("dataSource")
     private DataSource dataSource;
@@ -51,19 +48,22 @@ public class MultipleSecurityConfig {
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
-        jdbcTokenRepository.setDataSource(dataSource);
+        jdbcTokenRepository.setDataSource(this.dataSource);
         return jdbcTokenRepository;
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(this.userDetailsService);
-        auth.authenticationProvider(this.authenticationProvider);
     }
 
     @Configuration
     @Order(1)
     public static class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+        private final UserDetailsService userDetailsService;
+        private final AuthenticationProvider authenticationProvider;
+
+        @Autowired
+        public WebSecurityConfig(UserDetailsService userDetailsService, AuthenticationProvider authenticationProvider) {
+            this.userDetailsService = userDetailsService;
+            this.authenticationProvider = authenticationProvider;
+        }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception{
@@ -75,6 +75,7 @@ public class MultipleSecurityConfig {
                   .antMatchers("/css/**").permitAll()
                   .antMatchers("/js/**").permitAll()
                   .antMatchers("/fonts/**").permitAll()
+                  .antMatchers("/img/**").permitAll()
                   .antMatchers("/").permitAll()
                   .anyRequest().authenticated()
                 .and()
@@ -94,6 +95,12 @@ public class MultipleSecurityConfig {
                   .disable();
         }
 
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+            auth.userDetailsService(this.userDetailsService);
+            auth.authenticationProvider(this.authenticationProvider);
+        }
+
     }
 
     @Configuration
@@ -102,6 +109,15 @@ public class MultipleSecurityConfig {
 
         @Value("${realm.type}")
         private String realm;
+
+        private final UserDetailsService userDetailsService;
+        private final AuthenticationProvider authenticationProvider;
+
+        @Autowired
+        public RESTSecurityConfig(UserDetailsService userDetailsService, AuthenticationProvider authenticationProvider) {
+            this.userDetailsService = userDetailsService;
+            this.authenticationProvider = authenticationProvider;
+        }
 
         @Bean("restAuthenticationPoint")
         public BasicAuthenticationEntryPoint basicAuthenticationEntryPoint(){
@@ -115,6 +131,9 @@ public class MultipleSecurityConfig {
                   .antMatchers("/api_v1/admin_role/**").hasAuthority("ADMIN")
                   .antMatchers( "/api_v1/student_role/**").hasAuthority("STUDENT")
                   .antMatchers("/api_v1/cooperator_role/**").hasAuthority("COOPERATOR")
+                  .antMatchers("/api_v1/event/**").permitAll()
+                  .antMatchers("/api_v1/organization/**").permitAll()
+                  .antMatchers("/api_v1/schedule/**").permitAll()
                   .anyRequest().authenticated()
                  .and()
                   .httpBasic()
@@ -133,6 +152,12 @@ public class MultipleSecurityConfig {
         public void configure(WebSecurity web){
             web.ignoring()
                .antMatchers(HttpMethod.OPTIONS, "/**");
+        }
+
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+            auth.userDetailsService(this.userDetailsService);
+            auth.authenticationProvider(this.authenticationProvider);
         }
 
     }

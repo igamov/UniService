@@ -1,7 +1,7 @@
 package io.vscale.uniservice.services.implementations.events;
 
 import io.vscale.uniservice.domain.ConfirmationLimits;
-import io.vscale.uniservice.repositories.ConfirmationLimitsRepository;
+import io.vscale.uniservice.repositories.data.ConfirmationLimitsRepository;
 import io.vscale.uniservice.services.interfaces.events.ConfirmationLimitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

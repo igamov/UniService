@@ -21,6 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -41,6 +42,7 @@ import java.util.Set;
 @ToString(exclude = {"eventTypeEvaluations", "students", "managers"})
 @Entity(name = "Event")
 @Table(name = "event")
+@Document(indexName = "event", type = "events")
 public class Event {
 
     @Id
@@ -48,12 +50,18 @@ public class Event {
     @SequenceGenerator(name = "event_seq_gen", allocationSize = 1, sequenceName = "event_seq")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String description;
 
     @CreationTimestamp
     @Column(name = "creation_date", nullable = false)
     private Timestamp timestamp;
+
+    @Column(name = "event_date")
+    private Timestamp eventDate;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "event_to_type",

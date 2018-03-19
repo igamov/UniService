@@ -2,9 +2,9 @@ package io.vscale.uniservice.validators;
 
 import io.vscale.uniservice.domain.Group;
 import io.vscale.uniservice.domain.Profile;
-import io.vscale.uniservice.forms.StudentForm;
-import io.vscale.uniservice.repositories.GroupRepository;
-import io.vscale.uniservice.repositories.ProfileRepository;
+import io.vscale.uniservice.forms.rest.StudentForm;
+import io.vscale.uniservice.repositories.data.GroupRepository;
+import io.vscale.uniservice.repositories.data.ProfileRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 /**
  * 11.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Component

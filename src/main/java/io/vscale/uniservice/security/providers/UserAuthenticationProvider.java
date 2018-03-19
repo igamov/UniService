@@ -1,8 +1,7 @@
 package io.vscale.uniservice.security.providers;
 
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.repositories.UserRepository;
-import lombok.AllArgsConstructor;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,7 +21,7 @@ import java.util.Optional;
 /**
  * 01.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Component

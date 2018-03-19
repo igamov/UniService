@@ -1,7 +1,7 @@
 package io.vscale.uniservice.security.details;
 
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.repositories.UserRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

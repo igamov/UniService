@@ -1,8 +1,8 @@
 package io.vscale.uniservice.validators;
 
-import io.vscale.uniservice.forms.NewUserForm;
+import io.vscale.uniservice.forms.rest.NewUserForm;
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.repositories.UserRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

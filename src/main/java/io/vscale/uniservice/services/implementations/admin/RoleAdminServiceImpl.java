@@ -2,21 +2,20 @@ package io.vscale.uniservice.services.implementations.admin;
 
 import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.forms.RoleForm;
-import io.vscale.uniservice.repositories.RoleTypeRepository;
-import io.vscale.uniservice.repositories.UserRepository;
+import io.vscale.uniservice.forms.rest.RoleForm;
+import io.vscale.uniservice.repositories.data.RoleTypeRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import io.vscale.uniservice.services.interfaces.admin.RoleAdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 11.03.2018
  *
- * @author Andrey Romanov 
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Service

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 import io.vscale.uniservice.domain.Group;
 import io.vscale.uniservice.domain.Student;
-import io.vscale.uniservice.repositories.StudentRepository;
+import io.vscale.uniservice.repositories.data.StudentRepository;
 import io.vscale.uniservice.services.interfaces.student.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +39,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudents() {
         return this.studentRepository.findAll();
+    }
+
+    @Override
+    public Student getStudentById(Long studentId) {
+        return this.studentRepository.findOne(studentId);
     }
 }

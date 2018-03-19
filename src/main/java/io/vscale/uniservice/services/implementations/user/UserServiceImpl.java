@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.repositories.UserRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import io.vscale.uniservice.services.interfaces.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

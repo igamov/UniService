@@ -2,11 +2,12 @@ package io.vscale.uniservice.services.implementations.events;
 
 import io.vscale.uniservice.domain.Organization;
 import io.vscale.uniservice.domain.Student;
-import io.vscale.uniservice.repositories.OrganizationRepository;
+import io.vscale.uniservice.repositories.data.OrganizationRepository;
 import io.vscale.uniservice.services.interfaces.events.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,5 +29,30 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public Set<Student> getHeadOfOrganization(Organization organization) {
         return this.organizationRepository.findOne(organization.getId()).getHeadStudents();
+    }
+
+    @Override
+    public List<Organization> findAll() {
+        return organizationRepository.findAll();
+    }
+
+    @Override
+    public Organization findById(Long id) {
+        return organizationRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        organizationRepository.delete(id);
+    }
+
+    @Override
+    public void delete(Organization organization) {
+        organizationRepository.delete(organization);
+    }
+
+    @Override
+    public void save(Organization organization) {
+        organizationRepository.save(organization);
     }
 }

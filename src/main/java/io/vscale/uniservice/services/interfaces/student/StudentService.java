@@ -15,5 +15,6 @@ public interface StudentService {
 
     List<Student> getStudentsByGroup(Group group);
     List<Student> getAllStudents();
+    Student getStudentById(Long studentId);
 
 }

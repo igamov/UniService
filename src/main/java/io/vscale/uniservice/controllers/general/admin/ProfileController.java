@@ -24,7 +24,7 @@ public class ProfileController {
 
     @GetMapping("/index")
     public ModelAndView getAdminPage(){
-        return new ModelAndView("index/admin");
+        return new ModelAndView("admin");
     }
 
     @GetMapping("/get_all_users")

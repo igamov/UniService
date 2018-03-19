@@ -1,7 +1,7 @@
 package io.vscale.uniservice.services.implementations.auth;
 
 import io.vscale.uniservice.domain.User;
-import io.vscale.uniservice.repositories.UserRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
 import io.vscale.uniservice.security.details.UserDetailsImpl;
 import io.vscale.uniservice.services.interfaces.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;

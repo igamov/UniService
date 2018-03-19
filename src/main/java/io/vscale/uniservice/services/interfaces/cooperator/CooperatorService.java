@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 11.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 public interface CooperatorService {

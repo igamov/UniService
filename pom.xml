@@ -19,6 +19,7 @@
         <jackson-datatype.version>2.9.4</jackson-datatype.version>
         <h2.version>1.4.196</h2.version>
         <commons-io.version>2.6</commons-io.version>
+        <jsonwebtoken.version>0.9.0</jsonwebtoken.version>
 
     </properties>
 
@@ -54,7 +55,22 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
         <dependency>
@@ -92,7 +108,7 @@
 
     <build>
 
-        <finalName>UniService</finalName>
+        <finalName>uniservice</finalName>
 
         <plugins>
 

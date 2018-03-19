@@ -16,10 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
     @GetMapping("/")
-    public ModelAndView getIndexPage(@ModelAttribute("model") ModelMap model){
-
+    public ModelAndView getIndexPage(){
         return new ModelAndView("index");
-
     }
 
 }

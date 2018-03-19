@@ -2,7 +2,7 @@ package io.vscale.uniservice.controllers.general.admin;
 
 import lombok.AllArgsConstructor;
 
-import io.vscale.uniservice.forms.NewUserForm;
+import io.vscale.uniservice.forms.rest.NewUserForm;
 import io.vscale.uniservice.services.interfaces.admin.UserAdminService;
 import io.vscale.uniservice.validators.NewUserFormValidator;
 

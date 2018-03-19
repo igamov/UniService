@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Builder;
 import lombok.ToString;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -39,6 +40,7 @@ import java.util.Set;
 @ToString(exclude = {"confirmations", "organizations", "cooperators", "events"})
 @Entity(name = "FileOfService")
 @Table(name = "files_of_service")
+@Document(indexName = "file", type = "files")
 public class FileOfService {
 
     @Id

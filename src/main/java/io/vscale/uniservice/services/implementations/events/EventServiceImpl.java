@@ -2,11 +2,15 @@ package io.vscale.uniservice.services.implementations.events;
 
 import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.EventTypeEvaluation;
-import io.vscale.uniservice.repositories.EventRepository;
+import io.vscale.uniservice.forms.general.NewEventForm;
+import io.vscale.uniservice.repositories.data.EventRepository;
+import io.vscale.uniservice.repositories.data.StudentRepository;
 import io.vscale.uniservice.services.interfaces.events.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,10 +25,12 @@ import java.util.stream.Collectors;
 public class EventServiceImpl implements EventService {
 
     private EventRepository repository;
+    private final StudentRepository studentRepository;
 
     @Autowired
-    public EventServiceImpl(EventRepository eventRepository){
+    public EventServiceImpl(EventRepository eventRepository, StudentRepository studentRepository){
         this.repository = eventRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -44,8 +50,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void save(Event event) {
-        repository.save(event);
+    public Event save(Event event) {
+        return repository.save(event);
     }
 
     @Override
@@ -56,5 +62,36 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event findOne(Long id) {
         return repository.findOne(id);
+    }
+
+    @Override
+    public boolean getNewEvents() {
+
+        List<Event> currentEvents = this.repository.findAll();
+        LocalDate localDateCheck = LocalDate.now();
+
+        return currentEvents.stream()
+                            .anyMatch(event -> event.getTimestamp().equals(
+                                                           Timestamp.valueOf(localDateCheck.atStartOfDay())
+                            ));
+
+    }
+
+    @Override
+    public void addEventWithChecking(NewEventForm newEventForm) {
+
+        Event event = Event.builder()
+                           .description(newEventForm.getTitle())
+                           .timestamp(Timestamp.valueOf(newEventForm.getEventDate()))
+                           .students(Collections.singleton(this.studentRepository.findOne(newEventForm.getStudentId())))
+                           .build();
+
+        this.repository.save(event);
+
+    }
+
+    @Override
+    public List<Event> findAll() {
+        return repository.findAll();
     }
 }
