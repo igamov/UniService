@@ -3,29 +3,7 @@
 @import "vars"
 
 *
-	-webkit-box-sizing: border-box
-	-moz-box-sizing: border-box
-	box-sizing: border-box
-	&:before, &:after
-		-webkit-box-sizing: border-box
-		-moz-box-sizing: border-box
-		box-sizing: border-box
-
-*::-webkit-input-placeholder
-	color: #666
-	opacity: 1
-
-*:-moz-placeholder
-	color: #666
-	opacity: 1
-
-*::-moz-placeholder
-	color: #666
-	opacity: 1
-
-*:-ms-input-placeholder
-	color: #666
-	opacity: 1
+    margin: 0
 
 html, body
 	height: 100%
@@ -42,11 +20,14 @@ body
 
 .content
     min-height: 100%
-    margin-bottom: -70px
+    /* высота footer */
+    margin-bottom: -50px
     &:after
         content: ""
         display: block
-        height: 70px
+        height: 50px
+
+/*     шапка        */
 
 header
     box-shadow: 0 2px 10px 0 #ecf0f1
@@ -54,7 +35,7 @@ header
     height: 60px
 
 .header-container
-    width: 77%
+    width: 75%
     margin: 0 auto
     text-align: center
     line-height: 60px
@@ -85,16 +66,18 @@ ul
             ul
                 display: block
                 position: absolute
+                width: 130px
                 background-color: #ffffff
                 box-shadow: 0 2px 10px 0 #ecf0f1
-                padding: 0 25px
+                padding: 0 10px
                 z-index: 2
                 margin:
                     top: 1px
                 li
                     display: block
-                    float: left
                     margin: 0
+                    padding: 0
+                    float: left
                     a
                         &:hover
                             text-decoration: none
@@ -113,6 +96,10 @@ ul
             margin-right: 7px
     .profile
         margin-right: 5px
+
+
+/*     панель входа       */
+
 .panel
     background-color: #ffffff
     margin:
@@ -208,6 +195,8 @@ button
     p
         margin: 0
 
+/*     футер        */
+
 .social-media
     float: right
     a
@@ -223,20 +212,23 @@ button
         transition: background-color .25s ease
 footer
     background-color: $footer
-    margin-top: 20px
-
 .footer-container
     height: 50px
     text-align: center
     margin: 0 auto
-    width: 80%
+    width: 75%
     .footer-text
         padding: 10px 0
         color: #b4b4b4
         font-size: 1em
+
+
 .main-content
     width: 80%
     margin: 20px auto
+
+/*     левый блок сортировки данных        */
+
 .filter-data
     background-color: #ffffff
     box-shadow: 0 2px 10px 0 #ecf0f1
@@ -282,7 +274,7 @@ footer
     content: ''
 .control input:checked ~ .control_indicator:after
     display: block
-.control--radio .control_indicator:after
+.control--radio .control_iortndicator:after
     top: 7px
     left: 7px
     width: 6px
@@ -298,6 +290,7 @@ footer
     h4
         margin-bottom: 10px
         margin-top: 5px
+
 .select
     position: relative
     display: inline-block
@@ -329,13 +322,11 @@ footer
         &:disabled
             pointer-events: none
             opacity: .5
-        &:hover ~ .select__arrow, &:focus ~ .select__arrow
-            border-top-color: #000
         &:disabled ~ .select__arrow, &:focus ~ .select__arrow
             border-top-color: #ccc
 .select__arrow
     position: absolute
-    top: 26px
+    top: 18px
     right: 15px
     width: 0
     height: 0
@@ -344,11 +335,53 @@ footer
     border-style: solid
     border-color: $dark-accent-blue transparent transparent transparent
 
-.h1
-    margin: 0
-    padding: 0
-    font-size: 26px
-    text-align: center
+/*     основной блок данных на странице адмна        */
+
+.sort-select
+    position: relative
+    display: inline-block
+    width: 200px
+    margin-bottom: 20px
+    font-family: $default-font
+    select
+        font-size: 14px
+        font-family: $default-font
+        display: inline-block
+        width: 200px
+        height: 40px
+        padding: 8px
+        cursor: pointer
+        color: #0e0e0e
+        border: 1px solid #d6d6d6
+        border-radius: 0
+        outline: 0
+        background: #fff
+        -webkit-appearance: none
+        -moz-appearance: none
+        appearance: none
+        &::-ms-expand
+            display: none
+        &:hover, &:focus
+            color: #000
+            background: #fff
+            cursor: pointer
+        &:disabled
+            pointer-events: none
+            opacity: .5
+        &:disabled ~ .select__arrow, &:focus ~ .select__arrow
+            border-top-color: #ccc
+
+.title-data
+    text-align: justify
+    .h1
+        display: inline-block
+        margin: 0
+        padding: 0
+        font-size: 28px
+    .title-sort
+        float: right
+        display: inline-block
+        margin-bottom: 0
 
 .user-picture
     width: 120px
@@ -359,20 +392,28 @@ footer
     background-color: #ffffff
     box-shadow: 0 2px 10px 0 #ecf0f1
     padding: 20px
+
 .user-data
     font-size: 14px
     margin: 0
     .user-title
-        a
+        text-align: justify
+        .edit
             float: right
-            &:hover
-                outline: none
-                border: none
+            display: inline-block
+            &:hover, &:focus, &:active
                 text-decoration: none
-        .name
+                outline: none
+        .user-name
             display: inline-block
             font-size: 18px
             font-weight: bold
+            a
+                color: #111
+                &:hover, &:focus, &:active
+                    text-decoration: none
+                    outline: none
+                    color: $dark-accent-blue
     .course, .study, .group, .organization
         display: flex
         span
