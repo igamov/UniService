@@ -35,7 +35,7 @@ header
     height: 60px
 
 .header-container
-    width: 75%
+    width: 80%
     margin: 0 auto
     text-align: center
     line-height: 60px
@@ -46,30 +46,31 @@ header
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
     font-weight: 400
+    width: 25%
 
 .main-logo
     float: left
 
 ul
-    float: right
-    margin: 0
+    margin: 0 auto
     padding: 0
     list-style: none
+    display: flex
+    justify-content: space-between
     ul
         display: none
     li
         display: inline-block
-        margin: 0 35px
+        //margin: 0 35px
         padding: 0
         position: relative
         &:hover
             ul
                 display: block
                 position: absolute
-                width: 130px
                 background-color: #ffffff
                 box-shadow: 0 2px 10px 0 #ecf0f1
-                padding: 0 10px
+                padding: 0 25px
                 z-index: 2
                 margin:
                     top: 1px
@@ -216,15 +217,14 @@ footer
     height: 50px
     text-align: center
     margin: 0 auto
-    width: 75%
+    width: 80%
     .footer-text
         padding: 10px 0
         color: #b4b4b4
-        font-size: 1em
 
 
 .main-content
-    width: 80%
+    width: 85%
     margin: 20px auto
 
 /*     левый блок сортировки данных        */
