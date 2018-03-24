@@ -3,6 +3,9 @@ package io.vscale.uniservice.services.interfaces.events;
 import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.EventTypeEvaluation;
 import io.vscale.uniservice.forms.general.NewEventForm;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ public interface EventService {
     Event findOneByEventTypeEvaluations(EventTypeEvaluation evaluation);
     Event findOne(Long id);
     List<Event> findAll();
+    Page<Event> findAll(Pageable pageable);
     boolean getNewEvents();
     void addEventWithChecking(NewEventForm newEventForm);
 }

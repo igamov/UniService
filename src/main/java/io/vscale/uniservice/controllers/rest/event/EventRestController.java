@@ -6,17 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-/**
- * 19.03.2018
- *
- * @author Aynur Aymurzin
- * @version 1.0
- */
 @RestController
 @RequestMapping("/api_v1")
 public class EventRestController {
@@ -30,7 +25,10 @@ public class EventRestController {
 
     // ----------- FindAll Available Events ------------- //
     @GetMapping(value = "/event/")
-    public ResponseEntity<List<Event>> listAllEvents() {
+    public ResponseEntity<List<Event>> listAllEvents(Authentication authentication) {
+        if (authentication == null){
+            return new ResponseEntity("Вы не авторизованы", HttpStatus.UNAUTHORIZED);
+        }
         List<Event> events = eventService.findAll();
         if (events.isEmpty()) {
             return new ResponseEntity("empty", HttpStatus.NO_CONTENT);
@@ -41,17 +39,23 @@ public class EventRestController {
     // ----------------- Get Event ---------------------- //
 
     @GetMapping(value = "/event/{id}")
-    public ResponseEntity<?> getEvent(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getEvent(@PathVariable("id") Long id, Authentication authentication) {
+        if (authentication == null){
+            return new ResponseEntity("Вы не авторизованы", HttpStatus.UNAUTHORIZED);
+        }
         Event event = eventService.findOne(id);
         if (event == null){
             return new ResponseEntity("error", HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(event , HttpStatus.OK);
+          return new ResponseEntity<>(event , HttpStatus.OK);
     }
 
     // ----------------- Create Event ------------------- //
     @PostMapping(value = "/event/")
-    public ResponseEntity<?> addEvent(@RequestBody Event event, UriComponentsBuilder UriBuilder){
+    public ResponseEntity<?> addEvent(@RequestBody Event event, UriComponentsBuilder UriBuilder, Authentication authentication){
+        if (authentication == null){
+            return new ResponseEntity("Вы не авторизованы", HttpStatus.UNAUTHORIZED);
+        }
         eventService.save(event);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(UriBuilder.path("/api_v1/event/{id}").buildAndExpand(event.getId()).toUri());

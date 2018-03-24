@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!-- TODO пока так-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Дата проведения</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="event :${page.content}">
+                    <td th:text="${event.id}"></td>
+                    <td th:text="${event.name}"></td>
+                    <td th:text="${event.description}"></td>
+                    <td th:text="${event.eventDate}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+
+            <div th:fragment='paginationbar'>
+                <div class='pagination pagination-centered'>
+                    <ul class="nav nav-pills">
+                        <li  class="nav-item" th:class="${page.firstPage}? 'disabled' : ''" >
+                            <span th:if='${page.firstPage}'>← First</span>
+                            <a th:if='${not page.firstPage}'
+                               th:href='@{${page.url}(page=1)}'>←
+                                First</a>
+                        </li>
+                        <li   class="nav-item" th:class="${page.hasPreviousPage}? 'disabled': '' ">
+                            <span th:if='${not page.hasPreviousPage}'>«</span>
+                            <a th:if='${page.hasPreviousPage}'
+                               th:href='@{${page.url}(page=${page.number-1})}'
+                               title='Go to previous page'>«</a>
+                        </li>
+                        <li  class="nav-item" th:each="item : ${page.items}" th:class="${item.current}? 'active' : ''">
+                            <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                            <a th:if='${not item.current}'
+                               th:href='@{${page.url}(page=${item.number})}'><span
+                                    th:text='${item.number}'>1</span></a>
+                        </li>
+                        <li  class="nav-item" th:class="${page.hasNextPage}? 'disabled' : ''">
+                            <span th:if='${not page.hasNextPage}'>»</span>
+                            <a th:if='${page.hasNextPage}'
+                               th:href='@{${page.url}(page=${page.number+1})}'
+                               title='Go to next page'>»</a>
+                        </li>
+                        <li  class="nav-item" th:class="${page.lastPage}?  'disabled' : ''">
+                            <span th:if='${page.lastPage}'>Last →</span>
+                            <a th:if='${not page.lastPage}'
+                               th:href='@{${page.url}(page=${page.totalPages})}'>Last →</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

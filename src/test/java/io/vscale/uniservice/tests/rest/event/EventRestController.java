@@ -2,7 +2,12 @@ package io.vscale.uniservice.tests.rest.event;
 
 import io.vscale.uniservice.application.Application;
 import io.vscale.uniservice.domain.Event;
+import io.vscale.uniservice.domain.Profile;
+import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.repositories.data.EventRepository;
+import io.vscale.uniservice.repositories.data.UserRepository;
+import io.vscale.uniservice.security.states.UserState;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,23 +22,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
-/**
- * 19.03.2018
- *
- * @author Aynur Aymurzin
- * @version 1.0
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
@@ -65,12 +68,20 @@ public class EventRestController {
                 this.mappingJackson2HttpMessageConverter);
     }
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Before
-    public void setup(){
+    public void setup() {
+
+        userRepository.save(User.builder().login("ainur").password("qwerty").state(UserState.CONFIRMED).profile(new Profile()).build());
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
         this.eventRepository.deleteAllInBatch();
     }
-
+    @After
+    public void after(){
+        userRepository.delete(userRepository.findByLogin("ainur").get());
+    }
 
     @Test
     public void createEvent() throws Exception {
@@ -81,6 +92,7 @@ public class EventRestController {
         );
 
         this.mockMvc.perform(post("/api_v1/event/")
+                .with(user("ainur").password("qwerty"))
                 .contentType(contentType)
                 .content(eventJson))
                 .andExpect(status().isCreated());
