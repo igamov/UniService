@@ -24,52 +24,61 @@
 
 <div class="content">
 
-	<header>
+    <header>
         <nav class="header-container">
-            <a class="logo main-logo">UniService</a>
-            <ul>
-                <li><a href="#"><i class="fas fa-users"></i>Пользователи</a>
-                    <ul>
-                        <li><a href="admin.html">Студенты</a></li>
-                        <li><a href="admin-employees.html">Сотрудники</a></li>
-                    </ul>
-                </li>
-                <li><a href="admin-events.html"><i class="fas fa-bell"></i>Мероприятия</a></li>
-                <li><a href="admin-organizations.html"><i class="fas fa-list-alt"></i>Организации</a></li>
-                <li><a href="#"><i class="fas fa-edit"></i>Баллы</a></li>
-                <li class="profile"><a href="#"><i class="fas fa-user-circle"></i>Профиль</a>
-                    <ul>
-                        <li><a href="#">Настройки</a></li>
-                        <li><a href="#">Выйти</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <a href="admin.html" class="logo main-logo">UniService</a>
+
+            <a href="#menu" id="btn-menu" class="hamburger hamburger--spring" type="button" hidden>
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </a>
+
+            <div id="menu">
+                <ul>
+                    <li><a href="#"><i class="fas fa-users"></i>Пользователи</a>
+                        <ul>
+                            <li><a href="admin.html">Студенты</a></li>
+                            <li><a href="admin-employees.html">Сотрудники</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="admin-events.html"><i class="fas fa-bell"></i>Мероприятия</a></li>
+                    <li><a href="admin-organizations.html"><i class="fas fa-list-alt"></i>Организации</a></li>
+                    <li><a href="#"><i class="fas fa-edit"></i>Баллы</a></li>
+                    <li class="profile"><a href="#"><i class="fas fa-user-circle"></i>Профиль</a>
+                        <ul>
+                            <li><a href="#">Настройки</a></li>
+                            <li><a href="#">Выйти</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </nav>
-	</header>
+    </header>
 
     <div class="main-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-3">
                     <div class="filter-data">
                         <div class="select-box">
                             <form action="#" method="post">
-
-                                <h4>Название фильтра</h4>
-                                <div class="select">
-                                    <select title="">
-                                        <option>Не выбрано</option>
-                                        <option>Опция 1</option>
-                                        <option>Опция 2</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                <div class="select-item">
+                                    <h4>Название фильтра</h4>
+                                    <div class="select">
+                                        <select title="">
+                                            <option>Не выбрано</option>
+                                            <option>Фильтр 1</option>
+                                            <option>Фильтр 2</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 right-col">
+                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-9 right-col">
                     <div class="data-list">
                         <div class="title-data">
                             <h1 class="h1">Мероприятия</h1>

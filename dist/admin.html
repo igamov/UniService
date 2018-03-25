@@ -23,27 +23,35 @@
 <body>
 
 <div class="content">
-
 	<header>
         <nav class="header-container">
-            <a class="logo main-logo">UniService</a>
-            <ul>
-                <li><a href="#"><i class="fas fa-users"></i>Пользователи</a>
-                    <ul>
-                        <li><a href="admin.html">Студенты</a></li>
-                        <li><a href="admin-employees.html">Сотрудники</a></li>
-                    </ul>
-                </li>
-                <li><a href="admin-events.html"><i class="fas fa-bell"></i>Мероприятия</a></li>
-                <li><a href="admin-organizations.html"><i class="fas fa-list-alt"></i>Организации</a></li>
-                <li><a href="#"><i class="fas fa-edit"></i>Баллы</a></li>
-                <li class="profile"><a href="#"><i class="fas fa-user-circle"></i>Профиль</a>
-                    <ul>
-                        <li><a href="#">Настройки</a></li>
-                        <li><a href="#">Выйти</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <a href="admin.html" class="logo main-logo">UniService</a>
+
+            <a href="#menu" id="btn-menu" class="hamburger hamburger--spring" type="button" hidden>
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </a>
+
+            <div id="menu">
+                <ul>
+                    <li><a href="#"><i class="fas fa-users"></i>Пользователи</a>
+                        <ul>
+                            <li><a href="admin.html">Студенты</a></li>
+                            <li><a href="admin-employees.html">Сотрудники</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="admin-events.html"><i class="fas fa-bell"></i>Мероприятия</a></li>
+                    <li><a href="admin-organizations.html"><i class="fas fa-list-alt"></i>Организации</a></li>
+                    <li><a href="#"><i class="fas fa-edit"></i>Баллы</a></li>
+                    <li class="profile"><a href="#"><i class="fas fa-user-circle"></i>Профиль</a>
+                        <ul>
+                            <li><a href="#">Настройки</a></li>
+                            <li><a href="#">Выйти</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </nav>
 	</header>
 
@@ -54,53 +62,58 @@
                     <div class="filter-data">
                         <div class="select-box">
                             <form action="#" method="post">
-                                <h4>Обучение</h4>
-                                <div class="select">
-                                    <select title="">
-                                        <option>Не выбрано</option>
-                                        <option>Бакавлариат</option>
-                                        <option>Магистратура</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                <div class="select-item">
+                                    <h4>Обучение</h4>
+                                    <div class="select">
+                                        <select title="">
+                                            <option>Не выбрано</option>
+                                            <option>Бакавлариат</option>
+                                            <option>Магистратура</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
                                 </div>
-
-                                <h4>Курс</h4>
-                                <div class="select">
-                                    <select title="">
-                                        <option>Не выбрано</option>
-                                        <option>1 курс</option>
-                                        <option>2 курс</option>
-                                        <option>3 курс</option>
-                                        <option>4 курс</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                    <div class="select-item">
+                                    <h4>Курс</h4>
+                                    <div class="select">
+                                        <select title="">
+                                            <option>Не выбрано</option>
+                                            <option>1 курс</option>
+                                            <option>2 курс</option>
+                                            <option>3 курс</option>
+                                            <option>4 курс</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
                                 </div>
-
-                                <h4>Группа</h4>
-                                <div class="select">
-                                    <select title="">
-                                        <option>Не выбрано</option>
-                                        <option>11-601</option>
-                                        <option>11-602</option>
-                                        <option>11-603</option>
-                                        <option>11-604</option>
-                                        <option>11-605</option>
-                                        <option>11-606</option>
-                                        <option>11-607</option>
-                                        <option>11-608</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                <div class="select-item">
+                                    <h4>Группа</h4>
+                                    <div class="select">
+                                        <select title="">
+                                            <option>Не выбрано</option>
+                                            <option>11-601</option>
+                                            <option>11-602</option>
+                                            <option>11-603</option>
+                                            <option>11-604</option>
+                                            <option>11-605</option>
+                                            <option>11-606</option>
+                                            <option>11-607</option>
+                                            <option>11-608</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
                                 </div>
-
-                                <h4>Организация</h4>
-                                <div class="select">
-                                    <select title="">
-                                        <option>Не выбрано</option>
-                                        <option>ITIS Music</option>
-                                        <option>ITIS Dance</option>
-                                        <option>Театр</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                <div class="select-item">
+                                    <h4>Организация</h4>
+                                    <div class="select">
+                                        <select title="">
+                                            <option>Не выбрано</option>
+                                            <option>ITIS Music</option>
+                                            <option>ITIS Dance</option>
+                                            <option>Театр</option>
+                                        </select>
+                                        <div class="select__arrow"></div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -123,10 +136,10 @@
                         <!-- item 1 -->
                         <div class="list-item">
                             <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-3">
-                                    <img class="user-picture" src="img/default-user.png" alt="User">
+                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                                    <img class="user-picture center-block" src="img/default-user.png" alt="User">
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-9">
+                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                     <div class="user-data">
                                         <div class="user-title">
                                             <div class="user-name">
@@ -152,10 +165,10 @@
                         <!-- item 2 -->
                         <div class="list-item">
                             <div class="row">
-                                <div class="col-md-2">
-                                    <img class="user-picture" src="img/default-user.png" alt="User">
+                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-xss-12">
+                                    <img class="user-picture center-block" src="img/default-user.png" alt="User">
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9 col-xss-12">
                                     <div class="user-data">
                                         <div class="user-title">
                                             <div class="user-name">
@@ -181,10 +194,10 @@
                         <!-- item 3 -->
                         <div class="list-item">
                             <div class="row">
-                                <div class="col-md-2">
-                                    <img class="user-picture" src="img/default-user.png" alt="User">
+                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-xss-12">
+                                    <img class="user-picture center-block" src="img/default-user.png" alt="User">
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9 col-xss-12">
                                     <div class="user-data">
                                         <div class="user-title">
                                             <div class="user-name">
@@ -224,6 +237,8 @@
     </div>
 </footer>
 
-<script src="js/scripts.min.js"></script>
+<script src="js/scripts.min.js">
+</script>
+
 </body>
 </html>

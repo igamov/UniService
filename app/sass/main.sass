@@ -98,6 +98,44 @@ ul
     .profile
         margin-right: 5px
 
+#btn-menu
+    float: right
+    padding: 0
+
+.hamburger-box
+    height: 18px
+    width: 34px
+    .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after
+        height: 3px
+        background-color: $dark-accent-blue
+        border-radius: 0
+        width: 34px
+
+.mm-menu
+    font-size: 18px
+html.mm-opened
+    overflow-y: scroll
+.mm-panels > .mm-panel.mm-navbar
+    right: -18px
+.mm-listview>li:not(.mm-divider):after, .mm-listitem .mm-btn_next:before
+    display: none
+.mm-panels>.mm-panel:after, .mm-panels>.mm-panel:before
+    height: 0
+.mm-panels> .mm-panel>.mm-navbar+.mm-listview
+    margin-top: 30px
+.mm-navbars_top
+    border: none
+    margin-top: 10px
+
+.mm-listview > li > a,
+.mm-listview > li > span
+    padding-top: 15px
+    padding-bottom: 15px
+    font-size: 11px
+    margin-left: 5px
+.mm-navbar a
+    font-size: 22px
+    font-weight: 400
 
 /*     панель входа       */
 
@@ -146,7 +184,7 @@ ul
         top: 3px
         position: relative
 
-button
+.enter-button
     display: inline-block
     border: none
     color: #fff
