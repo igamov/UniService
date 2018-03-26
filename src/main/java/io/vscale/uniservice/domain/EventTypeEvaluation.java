@@ -51,6 +51,9 @@ public class EventTypeEvaluation {
     @Column(name = "end_value", nullable = false)
     private Byte endValue;
 
+    @Column(name = "final_value")
+    private Byte finalValue;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "eventTypeEvaluations")
     private List<Event> events;
 

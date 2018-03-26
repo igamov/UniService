@@ -4,6 +4,8 @@ import io.vscale.uniservice.domain.Cooperator;
 import io.vscale.uniservice.repositories.data.CooperatorRepository;
 import io.vscale.uniservice.services.interfaces.cooperator.CooperatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,5 +29,10 @@ public class CooperatorServiceImpl implements CooperatorService{
     @Override
     public List<Cooperator> getAllCooperators() {
         return this.cooperatorRepository.findAll();
+    }
+
+    @Override
+    public Page<Cooperator> findAll(Pageable pageable) {
+        return this.cooperatorRepository.findAll(pageable);
     }
 }

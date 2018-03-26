@@ -56,6 +56,9 @@ public class User {
     @Column(name = "password", columnDefinition = "TEXT")
     private String password;
 
+    @Column(name = "temp_password", columnDefinition = "TEXT")
+    private String tempPassword;
+
     @Column(name = "token", columnDefinition = "TEXT")
     private String token;
 

@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/admin")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class NewUserController {
+public class UserController {
 
     private UserAdminService userAdminService;
     private NewUserFormValidator newUserFormValidator;

@@ -1,8 +1,9 @@
-package io.vscale.uniservice.security.providers;
+package io.vscale.uniservice.security.providers.general;
 
 import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.repositories.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,15 +25,15 @@ import java.util.Optional;
  * @author Andrey Romanov
  * @version 1.0
  */
-@Component
+@Component("generalUserAuthentication")
 public class UserAuthenticationProvider implements AuthenticationProvider {
 
     private final UserRepository userRepository;
-
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public UserAuthenticationProvider(UserRepository userRepository, UserDetailsService userDetailsService) {
+    public UserAuthenticationProvider(UserRepository userRepository,
+                                      @Qualifier("generalUserDetailsService") UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.userDetailsService = userDetailsService;
     }
@@ -55,9 +56,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
             if(!passwordEncoder.matches(password, user.getPassword())){
 
-                if(passwordEncoder.matches(password, user.getToken())){
+                if(passwordEncoder.matches(password, user.getTempPassword())){
 
-                    user.setToken(null);
+                    user.setTempPassword(null);
                     this.userRepository.save(user);
 
                 }else{

@@ -1,5 +1,6 @@
 package io.vscale.uniservice.security.config;
 
+import io.vscale.uniservice.security.rest.filters.TokenAuthenticationFilter;
 import io.vscale.uniservice.security.rest.handlers.RESTAuthenticationEntryPoint;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -40,11 +43,6 @@ public class MultipleSecurityConfig {
     @Qualifier("dataSource")
     private DataSource dataSource;
 
-    @Bean("myPasswordEncoder")
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
@@ -60,7 +58,8 @@ public class MultipleSecurityConfig {
         private final AuthenticationProvider authenticationProvider;
 
         @Autowired
-        public WebSecurityConfig(UserDetailsService userDetailsService, AuthenticationProvider authenticationProvider) {
+        public WebSecurityConfig(@Qualifier("generalUserDetailsService") UserDetailsService userDetailsService,
+                                 @Qualifier("generalUserAuthentication") AuthenticationProvider authenticationProvider) {
             this.userDetailsService = userDetailsService;
             this.authenticationProvider = authenticationProvider;
         }
@@ -101,27 +100,45 @@ public class MultipleSecurityConfig {
             auth.authenticationProvider(this.authenticationProvider);
         }
 
+        @Bean("myPasswordEncoder")
+        public PasswordEncoder passwordEncoder(){
+            return new BCryptPasswordEncoder();
+        }
+
     }
 
     @Configuration
     @Order(2)
     public static class RESTSecurityConfig extends WebSecurityConfigurerAdapter{
 
-        @Value("${realm.type}")
-        private String realm;
-
         private final UserDetailsService userDetailsService;
         private final AuthenticationProvider authenticationProvider;
 
+        @Value("${application.tokenAuthentication.header}")
+        private String header;
+
         @Autowired
-        public RESTSecurityConfig(UserDetailsService userDetailsService, AuthenticationProvider authenticationProvider) {
+        public RESTSecurityConfig( @Qualifier("restUserDetailsService") UserDetailsService userDetailsService,
+                                   @Qualifier("restUserAuthentication") AuthenticationProvider authenticationProvider) {
             this.userDetailsService = userDetailsService;
             this.authenticationProvider = authenticationProvider;
         }
 
-        @Bean("restAuthenticationPoint")
-        public BasicAuthenticationEntryPoint basicAuthenticationEntryPoint(){
+        @Bean
+        public AuthenticationEntryPoint authenticationEntryPoint(){
             return new RESTAuthenticationEntryPoint();
+        }
+
+        @Override
+        public void configure(WebSecurity web){
+            web.ignoring()
+               .antMatchers(HttpMethod.OPTIONS, "/**");
+        }
+
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+            auth.userDetailsService(this.userDetailsService);
+            auth.authenticationProvider(this.authenticationProvider);
         }
 
         @Override
@@ -135,29 +152,20 @@ public class MultipleSecurityConfig {
                   .antMatchers("/api_v1/organization/**").permitAll()
                   .antMatchers("/api_v1/schedule/**").permitAll()
                   .anyRequest().authenticated()
-                 .and()
-                  .httpBasic()
-                  .realmName(this.realm)
-                  .authenticationEntryPoint(basicAuthenticationEntryPoint())
-                 .and()
+                .and()
+                  .addFilterBefore(
+                   new TokenAuthenticationFilter(this.authenticationProvider, authenticationEntryPoint(), this.header),
+                                                 BasicAuthenticationFilter.class)
                   .sessionManagement()
                   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                 .and()
+                .and()
                   .csrf()
+                  .disable()
+                  .httpBasic()
+                  .disable()
+                  .formLogin()
                   .disable();
 
-        }
-
-        @Override
-        public void configure(WebSecurity web){
-            web.ignoring()
-               .antMatchers(HttpMethod.OPTIONS, "/**");
-        }
-
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-            auth.userDetailsService(this.userDetailsService);
-            auth.authenticationProvider(this.authenticationProvider);
         }
 
     }

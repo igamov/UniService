@@ -5,6 +5,8 @@ import io.vscale.uniservice.domain.Student;
 import io.vscale.uniservice.repositories.data.OrganizationRepository;
 import io.vscale.uniservice.services.interfaces.events.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +56,10 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public void save(Organization organization) {
         organizationRepository.save(organization);
+    }
+
+    @Override
+    public Page<Organization> findAll(Pageable pageable) {
+        return this.organizationRepository.findAll(pageable);
     }
 }

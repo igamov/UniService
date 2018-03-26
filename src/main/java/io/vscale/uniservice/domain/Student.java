@@ -1,5 +1,6 @@
 package io.vscale.uniservice.domain;
 
+import io.vscale.uniservice.security.states.EducationState;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import java.util.List;
 import java.util.Set;
 
@@ -50,6 +53,10 @@ public class Student {
 
     @Column(name = "course")
     private Byte course;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "education_type")
+    private EducationState educationType;
 
     @Column(name = "gender", columnDefinition = "VARCHAR(7)")
     private String gender;
