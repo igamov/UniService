@@ -1,26 +1,42 @@
 package io.vscale.uniservice.utils;
 
-import io.vscale.uniservice.domain.*;
+import io.vscale.uniservice.domain.Group;
+import io.vscale.uniservice.domain.Cooperator;
+import io.vscale.uniservice.domain.Student;
+import io.vscale.uniservice.domain.Event;
+import io.vscale.uniservice.domain.EventTypeEvaluation;
+import io.vscale.uniservice.domain.FileOfService;
 import io.vscale.uniservice.repositories.data.CooperatorRepository;
 import io.vscale.uniservice.repositories.data.FileOfServiceRepository;
 import io.vscale.uniservice.repositories.data.GroupRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
  * 25.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Component

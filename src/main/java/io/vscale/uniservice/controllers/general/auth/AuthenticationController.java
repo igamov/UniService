@@ -1,13 +1,12 @@
 package io.vscale.uniservice.controllers.general.auth;
 
-import lombok.AllArgsConstructor;
-
 import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.security.role.Role;
 import io.vscale.uniservice.services.interfaces.auth.AuthenticationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,10 +25,14 @@ import java.util.Optional;
  * @version 1.0
  */
 @Controller
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthenticationController {
 
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
+
+    @Autowired
+    public AuthenticationController(@Qualifier("generalAuthenticationService") AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     @GetMapping("/login")
     public String login(@ModelAttribute("model") ModelMap model, Authentication authentication,

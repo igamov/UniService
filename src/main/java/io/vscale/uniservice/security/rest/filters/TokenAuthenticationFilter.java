@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * 25.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 public class TokenAuthenticationFilter extends GenericFilterBean{
@@ -31,6 +31,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
     private final AuthenticationProvider authenticationProvider;
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final String header;
+
     public TokenAuthenticationFilter( AuthenticationProvider authenticationProvider,
                                       AuthenticationEntryPoint authenticationEntryPoint, String header) {
         this.authenticationProvider = authenticationProvider;

@@ -1,4 +1,4 @@
-package io.vscale.uniservice.services.implementations.auth;
+package io.vscale.uniservice.services.implementations.auth.general;
 
 import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.repositories.data.UserRepository;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author Andrey Romanov
  * @version 1.0
  */
-@Service
+@Service("generalAuthenticationService")
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private UserRepository userRepository;

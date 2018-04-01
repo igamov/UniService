@@ -1,6 +1,9 @@
 package io.vscale.uniservice.services.interfaces.cooperator;
 
 import io.vscale.uniservice.domain.Cooperator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,4 +15,5 @@ import java.util.List;
  */
 public interface CooperatorService {
     List<Cooperator> getAllCooperators();
+    Page<Cooperator> findAll(Pageable pageable);
 }

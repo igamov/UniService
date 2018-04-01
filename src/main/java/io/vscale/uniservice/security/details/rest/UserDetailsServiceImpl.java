@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * 25.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Service("restUserDetailsService")

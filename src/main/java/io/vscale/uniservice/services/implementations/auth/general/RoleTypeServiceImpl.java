@@ -1,4 +1,4 @@
-package io.vscale.uniservice.services.implementations.auth;
+package io.vscale.uniservice.services.implementations.auth.general;
 
 import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.repositories.data.RoleTypeRepository;

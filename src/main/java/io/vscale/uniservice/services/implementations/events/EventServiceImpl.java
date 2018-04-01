@@ -2,11 +2,14 @@ package io.vscale.uniservice.services.implementations.events;
 
 import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.EventTypeEvaluation;
+import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.forms.general.NewEventForm;
 import io.vscale.uniservice.repositories.data.EventRepository;
 import io.vscale.uniservice.repositories.data.StudentRepository;
 import io.vscale.uniservice.services.interfaces.events.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -91,7 +94,19 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Event> getEventsByUser(User user) {
+        return user.getProfile()
+                   .getStudent()
+                   .getEvents();
+    }
+
+    @Override
     public List<Event> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Event> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

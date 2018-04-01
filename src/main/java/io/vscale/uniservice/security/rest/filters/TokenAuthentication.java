@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * 25.03.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 public class TokenAuthentication extends AbstractAuthenticationToken {

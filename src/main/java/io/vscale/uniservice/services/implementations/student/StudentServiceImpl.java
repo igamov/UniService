@@ -8,6 +8,9 @@ import io.vscale.uniservice.repositories.data.StudentRepository;
 import io.vscale.uniservice.services.interfaces.student.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +47,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentById(Long studentId) {
         return this.studentRepository.findOne(studentId);
+    }
+
+    @Override
+    public Page<Student> findAll(Pageable pageable) {
+        return this.studentRepository.findAll(pageable);
     }
 }

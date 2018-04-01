@@ -2,6 +2,8 @@ package io.vscale.uniservice.services.interfaces.events;
 
 import io.vscale.uniservice.domain.Organization;
 import io.vscale.uniservice.domain.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Set;
@@ -25,5 +27,7 @@ public interface OrganizationService {
     void delete(Organization organization);
 
     void save(Organization organization);
+
+    Page<Organization> findAll(Pageable pageable);
 
 }
