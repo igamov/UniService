@@ -76,6 +76,7 @@ public class MultipleSecurityConfig {
                   .antMatchers("/fonts/**").permitAll()
                   .antMatchers("/img/**").permitAll()
                   .antMatchers("/").permitAll()
+                  .antMatchers("/eve").permitAll()
                   .anyRequest().authenticated()
                 .and()
                   .formLogin().loginPage("/login")
