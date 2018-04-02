@@ -6,10 +6,13 @@ import io.vscale.uniservice.services.interfaces.cooperator.CooperatorService;
 import io.vscale.uniservice.utils.PageWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +35,40 @@ public class CooperatorController {
 
         PageWrapper<Cooperator> pageWrapper =
                 new PageWrapper<>(this.cooperatorService.findAll(pageable), "/admin/cooperators");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/admin-employees");
+        modelAndView.addObject("pageWrapper", pageWrapper);
+
+        return modelAndView;
+
+    }
+
+    @PostMapping("/cooperators/asc")
+    public ModelAndView showCooperatorsAsc(@PageableDefault(value = 4) Pageable pageable){
+
+        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
+                                                  Sort.Direction.ASC, "profile.surname");
+
+        PageWrapper<Cooperator> pageWrapper =
+                new PageWrapper<>(this.cooperatorService.findAll(pageRequest), "/admin/cooperators/asc");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/admin-employees");
+        modelAndView.addObject("pageWrapper", pageWrapper);
+
+        return modelAndView;
+
+    }
+
+    @PostMapping("/cooperators/desc")
+    public ModelAndView showCooperatorsDesc(@PageableDefault(value = 4) Pageable pageable){
+
+        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
+                                                  Sort.Direction.DESC, "profile.surname");
+
+        PageWrapper<Cooperator> pageWrapper =
+                new PageWrapper<>(this.cooperatorService.findAll(pageRequest), "/admin/cooperators/desc");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-employees");

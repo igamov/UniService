@@ -2,6 +2,7 @@ package io.vscale.uniservice.services.implementations.events;
 
 import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.EventTypeEvaluation;
+import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.forms.general.NewEventForm;
 import io.vscale.uniservice.repositories.data.EventRepository;
 import io.vscale.uniservice.repositories.data.StudentRepository;
@@ -90,6 +91,13 @@ public class EventServiceImpl implements EventService {
 
         this.repository.save(event);
 
+    }
+
+    @Override
+    public List<Event> getEventsByUser(User user) {
+        return user.getProfile()
+                   .getStudent()
+                   .getEvents();
     }
 
     @Override

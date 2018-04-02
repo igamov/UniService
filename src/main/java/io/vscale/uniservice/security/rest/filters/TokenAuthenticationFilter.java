@@ -31,6 +31,7 @@ public class TokenAuthenticationFilter extends GenericFilterBean{
     private final AuthenticationProvider authenticationProvider;
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final String header;
+
     public TokenAuthenticationFilter( AuthenticationProvider authenticationProvider,
                                       AuthenticationEntryPoint authenticationEntryPoint, String header) {
         this.authenticationProvider = authenticationProvider;

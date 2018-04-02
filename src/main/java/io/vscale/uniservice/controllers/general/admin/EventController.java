@@ -10,7 +10,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 26.03.2018
@@ -34,6 +39,29 @@ public class EventController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-events");
         modelAndView.addObject("pageWrapper", pageWrapper);
+
+        return modelAndView;
+
+    }
+
+    @GetMapping("/events/alph")
+    public ModelAndView showEventsWithAlthabeticPagination(@RequestParam(defaultValue = "а") char ch){
+
+        String start = ""+ ch;
+        List<Event> events = eventService.findAll();
+        List<Event> res = events.stream()
+                                .filter( o -> o.getName().toLowerCase().startsWith(start))
+                                .collect(Collectors.toList());
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Character> characters = new ArrayList<>();
+        for (int i =0; i < 32; i++){
+            characters.add((char) (i + 'а'));
+        }
+        modelAndView.setViewName("admin/admin-events-alph");
+        modelAndView.addObject("res", res);
+        modelAndView.addObject("curentCh", ch);
+        modelAndView.addObject("alph", characters);
 
         return modelAndView;
 

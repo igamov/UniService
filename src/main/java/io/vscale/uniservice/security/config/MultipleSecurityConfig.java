@@ -94,8 +94,8 @@ public class MultipleSecurityConfig {
                   .disable();
         }
 
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception{
             auth.userDetailsService(this.userDetailsService);
             auth.authenticationProvider(this.authenticationProvider);
         }
@@ -113,20 +113,19 @@ public class MultipleSecurityConfig {
 
         private final UserDetailsService userDetailsService;
         private final AuthenticationProvider authenticationProvider;
+        private final AuthenticationEntryPoint authenticationEntryPoint;
 
         @Value("${application.tokenAuthentication.header}")
         private String header;
 
         @Autowired
         public RESTSecurityConfig( @Qualifier("restUserDetailsService") UserDetailsService userDetailsService,
-                                   @Qualifier("restUserAuthentication") AuthenticationProvider authenticationProvider) {
+                                   @Qualifier("restUserAuthentication") AuthenticationProvider authenticationProvider,
+                                   @Qualifier("restAuthenticationEntryPoint")
+                                                   AuthenticationEntryPoint authenticationEntryPoint) {
             this.userDetailsService = userDetailsService;
             this.authenticationProvider = authenticationProvider;
-        }
-
-        @Bean
-        public AuthenticationEntryPoint authenticationEntryPoint(){
-            return new RESTAuthenticationEntryPoint();
+            this.authenticationEntryPoint = authenticationEntryPoint;
         }
 
         @Override
@@ -135,8 +134,8 @@ public class MultipleSecurityConfig {
                .antMatchers(HttpMethod.OPTIONS, "/**");
         }
 
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        @Override
+        public void configure(AuthenticationManagerBuilder auth) throws Exception{
             auth.userDetailsService(this.userDetailsService);
             auth.authenticationProvider(this.authenticationProvider);
         }
@@ -154,7 +153,8 @@ public class MultipleSecurityConfig {
                   .anyRequest().authenticated()
                 .and()
                   .addFilterBefore(
-                   new TokenAuthenticationFilter(this.authenticationProvider, authenticationEntryPoint(), this.header),
+                   new TokenAuthenticationFilter(this.authenticationProvider,
+                                                 this.authenticationEntryPoint, this.header),
                                                  BasicAuthenticationFilter.class)
                   .sessionManagement()
                   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
