@@ -461,4 +461,43 @@ footer
             color: #919191
 
 
+/* Pagination */
+.pagination
+    padding-left: 0
+    margin-top: 10px
+    margin-bottom: 10px
+    padding-top: 10px
+    list-style: none
+    display: block
+    align-items: center
+    text-align: center
+
+.pagination__number_active
+    font-weight: 700
+
+.pagination__control_prev
+    margin-left: 4px
+
+.pagination__control_next
+    margin-right: 4px
+
+.pagination__number
+    display: inline-block
+    line-height: 1
+    padding: 5px 8px
+    border: 2px solid transparent
+    border-radius: 2px
+    text-decoration: none
+    color: inherit
+    &:focus
+        outline-color: $dark-accent-blue
+
+.pagination__number_active
+    border-color: transparent
+    background-color:  $dark-accent-blue
+    color: #fff
+    &:focus, &:active, &:hover
+        color: white
+
+
 @import "media" // Всегда в конце
