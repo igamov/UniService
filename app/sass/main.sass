@@ -418,30 +418,29 @@ footer
     border-style: solid
     border-color: $dark-accent-blue transparent transparent transparent
 
-/*     основной блок данных на странице адмна        */
+/*     основной блок данных на странице админа        */
 
 .sort-select
     position: relative
-    display: inline-block
-    width: 200px
-    margin-bottom: 20px
+    display: flex
     font-family: $default-font
+    box-shadow: 0 2px 10px 0 #ecf0f1
+    background: #fff
+    padding: 0
     select
+        padding: 0 0 0 15px
+        width: 200px
         font-size: 14px
         font-family: $default-font
         display: inline-block
-        width: 200px
         height: 40px
-        padding: 8px
         cursor: pointer
         color: #0e0e0e
-        border: 1px solid #d6d6d6
+        border: none
         border-radius: 0
         outline: 0
-        background: #fff
         -webkit-appearance: none
         -moz-appearance: none
-        appearance: none
         &::-ms-expand
             display: none
         &:hover, &:focus
@@ -455,16 +454,46 @@ footer
             border-top-color: #ccc
 
 .title-data
-    text-align: justify
+    text-align: center
     .h1
         display: inline-block
         margin: 0
         padding: 0
         font-size: 28px
     .title-sort
+        float: left
+        margin-bottom: 0
+    .search-title
         float: right
         display: inline-block
         margin-bottom: 0
+        .search-box
+            vertical-align: middle
+            white-space: nowrap
+            box-shadow: 0 2px 10px 0 #ecf0f1
+            font-size: 14px
+            input#search
+                height: 40px
+                background: white
+                border: none
+                padding: 0 0 0 15px
+                &::-webkit-input-placeholder
+                    color: #65737e
+                &::-moz-placeholder
+                    color: #65737e
+                &:-ms-input-placeholder
+                    color: #65737e
+                &:hover, &:active, &:focus
+                    outline: none
+            button.icon
+                border: none
+                background: white
+                height: 40px
+                width: 40px
+                color: #4f5b66
+                &:hover, &:active, &:focus
+                    outline: none
+                    background: #fafafa
 
 .user-picture
     width: 120px
