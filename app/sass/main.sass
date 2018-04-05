@@ -224,7 +224,52 @@ html.mm-opened
         background-color: darken(#33B0DA, 5%)
         &::after
             opacity: .32
+.modal-title
+    font-size: 20px
+    font-family: $default-font
+.modal-button
+    margin-top: 20px
+    border: none
+    color: #fff
+    text-decoration: none
+    background-color: $button
+    padding: 10px 25px
+    font-size: 13px
+    text-transform: uppercase
+    font-weight: 600
+    letter-spacing: 2px
+    border-radius: 2px
+    text-align: center
+    position: relative
+    outline: none
+    width: 200px
+    transition: background-color .1s ease
+    &::after
+        transition: background-color .2s ease
+        position: absolute
+        content: ''
+        height: 4px
+        bottom: 0
+        width: 200px
+        background-color: darken($button, 50%)
+        opacity: .18
+        border-bottom-left-radius: 2px
+        border-bottom-right-radius: 2px
+        left: 0
+    &:focus, &:hover
+        text-decoration: none
+        color: #fff
+    &:hover
+        background-color: lighten($button, 5%)
+        &::after
+            opacity: .22
+    &:active
+        background-color: darken(#33B0DA, 5%)
+        &::after
+            opacity: .32
 
+.modal-body
+    padding: 20px
 .alert
     margin: 10px 0
     padding: 10px

@@ -53,8 +53,29 @@
                 <div class="input-box">
                     <label class="remember-me"><input name="" value="remember" type="checkbox" /> &nbsp;Запомнить меня</label>
                 </div>
-                <button class="enter-button" type="submit" value="Войти">Войти</button>
+                <!---  2 типа кнопки: если 2 роли пользователя то эта кнопка -->
+
+                <button class="enter-button" type="button" data-toggle="modal" data-target="#myModal">Войти</button>
+
+                <!---  если 1 роль, то вот эта -->
+                <!--- <button class="enter-button" type="submit" value="Войти">Войти</button> -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Выберите роль</h4>
+                                <button class="modal-button" type="submit" value="Войти">Войти как администратор</button>
+                                <button class="modal-button" type="submit" value="Войти">Войти как сотрудник </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
+
         </div>
     </div>
 </div>
