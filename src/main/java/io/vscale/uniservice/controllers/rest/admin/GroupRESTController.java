@@ -35,7 +35,7 @@ public class GroupRESTController {
 
     @PostMapping("/add_group")
     public List<Group> addStudentsGroup(@RequestBody @Valid @ModelAttribute("groupForm")GroupForm groupForm){
-        this.groupAdminService.addGroup(groupForm);
+        this.groupAdminService.addGroupREST(groupForm);
         return this.groupService.getAllGroups();
     }
 

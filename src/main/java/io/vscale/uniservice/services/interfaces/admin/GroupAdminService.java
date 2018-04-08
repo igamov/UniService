@@ -9,5 +9,5 @@ import io.vscale.uniservice.forms.rest.GroupForm;
  * @version 1.0
  */
 public interface GroupAdminService {
-    void addGroup(GroupForm groupForm);
+    void addGroupREST(GroupForm groupForm);
 }

@@ -6,6 +6,7 @@ import io.vscale.uniservice.repositories.data.OrganizationRepository;
 import io.vscale.uniservice.services.interfaces.events.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,31 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public Page<Organization> findAll(Pageable pageable) {
         return this.organizationRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Organization> retrieveSortedOrganizationsAsc(Pageable pageable) {
+
+        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleAsc();
+
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize() ) > organizations.size() ?
+                                                               organizations.size() : (start + pageable.getPageSize());
+
+        return new PageImpl<>(organizations.subList(start, end), pageable, organizations.size());
+
+    }
+
+    @Override
+    public Page<Organization> retrieveSortedOrganizationsDesc(Pageable pageable) {
+
+        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleDesc();
+
+        int start = pageable.getOffset();
+        int end = (start + pageable.getPageSize() ) > organizations.size() ?
+                                                               organizations.size() : (start + pageable.getPageSize());
+
+        return new PageImpl<>(organizations.subList(start, end), pageable, organizations.size());
+
     }
 }

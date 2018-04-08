@@ -36,7 +36,7 @@ public class CooperatorRESTController {
     @PostMapping("/create_cooperator")
     public List<Cooperator> createCooperator(@RequestBody @Valid @ModelAttribute("cooperatorForm")
                                                      CooperatorForm cooperatorForm){
-        this.cooperatorAdminService.makeCooperator(cooperatorForm);
+        this.cooperatorAdminService.makeRESTCooperator(cooperatorForm);
         return this.cooperatorService.getAllCooperators();
     }
 

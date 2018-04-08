@@ -5,6 +5,7 @@ import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.forms.rest.ProfileForm;
 import io.vscale.uniservice.repositories.data.ProfileRepository;
 import io.vscale.uniservice.repositories.data.UserRepository;
+import io.vscale.uniservice.repositories.indexing.ProfileESRepository;
 import io.vscale.uniservice.services.interfaces.admin.ProfileAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,14 @@ public class ProfileAdminServiceImpl implements ProfileAdminService{
 
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
+    private final ProfileESRepository profileESRepository;
 
     @Autowired
-    public ProfileAdminServiceImpl(UserRepository userRepository, ProfileRepository profileRepository) {
+    public ProfileAdminServiceImpl(UserRepository userRepository, ProfileRepository profileRepository,
+                                   ProfileESRepository profileESRepository) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
+        this.profileESRepository = profileESRepository;
     }
 
     @Override
@@ -42,6 +46,7 @@ public class ProfileAdminServiceImpl implements ProfileAdminService{
                                  .build();
 
         this.profileRepository.save(profile);
+        this.profileESRepository.save(profile);
 
     }
 }

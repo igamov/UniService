@@ -11,6 +11,6 @@ import io.vscale.uniservice.forms.rest.NewUserForm;
  */
 public interface UserAdminService {
 
-    void addNewUser(NewUserForm newUserForm);
+    void addNewUserREST(NewUserForm newUserForm);
 
 }

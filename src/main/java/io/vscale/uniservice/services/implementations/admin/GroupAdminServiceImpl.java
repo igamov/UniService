@@ -26,7 +26,7 @@ public class GroupAdminServiceImpl implements GroupAdminService{
     }
 
     @Override
-    public void addGroup(GroupForm groupForm) {
+    public void addGroupREST(GroupForm groupForm) {
 
         Group group = Group.builder()
                            .title(groupForm.getTitle())

@@ -9,7 +9,7 @@ import lombok.ToString;
 import lombok.NoArgsConstructor;
 
 /**
- * 18.03.2018
+ * 11.03.2018
  *
  * @author Andrey Romanov
  * @version 1.0
@@ -21,11 +21,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @EqualsAndHashCode
 @ToString
-public class NewEventForm {
+public class ProfileForm {
 
     private Long id;
-    private String title;
-    private String eventDate;
-    private Long studentId;
+    private String surname;
+    private String name;
+    private String patronymic;
+    private String email;
+    private String description;
+    private Long userId;
 
 }

@@ -35,7 +35,7 @@ public class StudentAdminRESTController {
 
     @PostMapping("/create_student")
     public List<Student> createStudent(@RequestBody @Valid @ModelAttribute("studentForm")StudentForm studentForm){
-        this.studentAdminService.makeStudent(studentForm);
+        this.studentAdminService.makeRESTStudent(studentForm);
         return this.studentService.getAllStudents();
     }
 

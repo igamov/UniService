@@ -5,6 +5,7 @@ import io.vscale.uniservice.domain.Profile;
 import io.vscale.uniservice.forms.rest.CooperatorForm;
 import io.vscale.uniservice.repositories.data.CooperatorRepository;
 import io.vscale.uniservice.repositories.data.ProfileRepository;
+import io.vscale.uniservice.repositories.indexing.CooperatorESRepository;
 import io.vscale.uniservice.services.interfaces.admin.CooperatorAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,18 @@ public class CooperatorAdminServiceImpl implements CooperatorAdminService{
 
     private final ProfileRepository profileRepository;
     private final CooperatorRepository cooperatorRepository;
+    private final CooperatorESRepository cooperatorESRepository;
 
     @Autowired
-    public CooperatorAdminServiceImpl(ProfileRepository profileRepository, CooperatorRepository cooperatorRepository) {
+    public CooperatorAdminServiceImpl(ProfileRepository profileRepository, CooperatorRepository cooperatorRepository,
+                                      CooperatorESRepository cooperatorESRepository) {
         this.profileRepository = profileRepository;
         this.cooperatorRepository = cooperatorRepository;
+        this.cooperatorESRepository = cooperatorESRepository;
     }
 
     @Override
-    public void makeCooperator(CooperatorForm cooperatorForm) {
+    public void makeRESTCooperator(CooperatorForm cooperatorForm) {
 
         Profile profile = this.profileRepository.findOne(cooperatorForm.getProfileId());
 
@@ -39,6 +43,7 @@ public class CooperatorAdminServiceImpl implements CooperatorAdminService{
                                           .build();
 
         this.cooperatorRepository.save(cooperator);
+        this.cooperatorESRepository.save(cooperator);
 
     }
 }

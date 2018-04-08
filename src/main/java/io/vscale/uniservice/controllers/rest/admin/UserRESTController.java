@@ -35,7 +35,7 @@ public class UserRESTController {
 
     @PostMapping("/add_user")
     public User addNewUser(@RequestBody @Valid @ModelAttribute("newUserForm") NewUserForm newUserForm){
-        this.userAdminService.addNewUser(newUserForm);
+        this.userAdminService.addNewUserREST(newUserForm);
         return this.userService.getUserByLogin(newUserForm.getLogin());
     }
 
