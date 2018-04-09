@@ -9,19 +9,7 @@ import lombok.Builder;
 import lombok.ToString;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.GenerationType;
-import javax.persistence.FetchType;
-import javax.persistence.Column;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(exclude = {"confirmations", "organizations", "cooperators", "events"})
-@ToString(exclude = {"confirmations", "organizations", "cooperators", "events"})
+@ToString(exclude = {"confirmations", "organizations", "cooperators", "events","profile"})
 @Entity(name = "FileOfService")
 @Table(name = "files_of_service")
 @Document(indexName = "file", type = "files")
@@ -77,5 +65,8 @@ public class FileOfService {
                joinColumns = @JoinColumn(name = "org_file_id"),
                inverseJoinColumns = @JoinColumn(name = "file_organization_id"))
     private Set<Organization> organizations;
+
+    @OneToOne(mappedBy = "avatar")
+    private Profile profile;
 
 }

@@ -62,7 +62,7 @@ public class Profile {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -80,5 +80,9 @@ public class Profile {
                joinColumns = @JoinColumn(name = "manager_id"),
                inverseJoinColumns = @JoinColumn(name = "manage_event_id"))
     private Set<Event> manageEvents;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "avatar_id")
+    private FileOfService avatar;
 
 }

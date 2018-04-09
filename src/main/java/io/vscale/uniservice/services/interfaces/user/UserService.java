@@ -2,6 +2,8 @@ package io.vscale.uniservice.services.interfaces.user;
 
 import io.vscale.uniservice.domain.RoleType;
 import io.vscale.uniservice.domain.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,4 +20,7 @@ public interface UserService {
     User getUserById(Long id);
     List<User> getAllUsers();
 
+    User findByAuthentication(Authentication authentication);
+
+    String savePhoto(MultipartFile file, Authentication authentication);
 }

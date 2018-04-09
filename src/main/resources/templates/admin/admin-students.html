@@ -135,7 +135,9 @@
                         <div class="list-item" th:each="student : ${pageWrapper.content}">
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-                                    <img class="user-picture center-block" th:src="@{img/default-user.png}" alt="User"/>
+                                    <img class="user-picture center-block" th:if="${student.profile.avatar?.url}" th:src="@{${student.profile.avatar?.url}}"/>
+
+                                    <img class="user-picture center-block" th:unless="${student.profile.avatar?.url}" src="/img/default-user.png" alt="User"/>
                                 </div>
                                 <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
                                     <div class="user-data">
@@ -149,7 +151,7 @@
                                             </div>
                                             <a class="edit" href="#"><i class="fas fa-edit"></i> Редактировать</a>
                                         </div>
-                                        <div class="user-info">
+                                        <div class="user-info" >
                                             <p th:inline="text"><span>Обучение:</span>[[${student.educationType.toString()}]]</p>
                                             <p th:inline="text"><span>Курс:</span>[[${student.course}]]</p>
                                             <p th:inline="text"><span>Группа:</span>[[${student.groups.iterator().next().title}]]</p>

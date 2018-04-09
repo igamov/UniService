@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${user.profile.avatar?.url}">
+        <img style="height: 5em; width: 5em"  th:src="@{${user.profile.avatar?.url}}"/>
+    </div>
+    <div th:unless="${user.profile.avatar?.url}">
+        <img style="height: 5em; width: 5em"  src="/img/default-user.png"/>
+    </div>
+
+    <ul>
+        <li th:text="${user.profile.name}">Имя: </li>
+        <li th:text="${user.profile.surname}">Фамилия: </li>
+        <li th:text="${user.profile.patronymic}">Отчество: </li>
+    </ul>
+
+    <form action="/student/save-photo" enctype="multipart/form-data"  method="post">
+        <input type="file" id="file" name="file" placeholder="Выберите файл..."/>
+        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+    </form>
+</body>
+</html>
