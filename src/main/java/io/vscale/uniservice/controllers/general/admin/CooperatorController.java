@@ -30,6 +30,7 @@ public class CooperatorController {
     private CooperatorService cooperatorService;
     private CooperatorAdminService cooperatorAdminService;
 
+
     @GetMapping("/cooperators")
     public ModelAndView showCooperators(@PageableDefault(value = 4) Pageable pageable){
 
@@ -44,14 +45,11 @@ public class CooperatorController {
 
     }
 
-    @PostMapping("/cooperators/asc")
+    @GetMapping("/cooperators/asc")
     public ModelAndView showCooperatorsAsc(@PageableDefault(value = 4) Pageable pageable){
 
-        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-                                                  Sort.Direction.ASC, "profile.surname");
-
         PageWrapper<Cooperator> pageWrapper =
-                new PageWrapper<>(this.cooperatorService.findAll(pageRequest), "/admin/cooperators/asc");
+                new PageWrapper<>(this.cooperatorService.retrieveAllCooperatorsAsc(pageable), "/admin/cooperators/asc");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-employees");
@@ -61,14 +59,11 @@ public class CooperatorController {
 
     }
 
-    @PostMapping("/cooperators/desc")
+    @GetMapping("/cooperators/desc")
     public ModelAndView showCooperatorsDesc(@PageableDefault(value = 4) Pageable pageable){
 
-        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-                                                  Sort.Direction.DESC, "profile.surname");
-
         PageWrapper<Cooperator> pageWrapper =
-                new PageWrapper<>(this.cooperatorService.findAll(pageRequest), "/admin/cooperators/desc");
+                new PageWrapper<>(this.cooperatorService.retrieveAllCooperatorsDesc(pageable), "/admin/cooperators/desc");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-employees");

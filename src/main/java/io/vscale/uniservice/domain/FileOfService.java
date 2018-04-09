@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
@@ -77,5 +78,8 @@ public class FileOfService {
                joinColumns = @JoinColumn(name = "org_file_id"),
                inverseJoinColumns = @JoinColumn(name = "file_organization_id"))
     private Set<Organization> organizations;
+
+    @OneToOne(mappedBy = "avatar")
+    private Profile profile;
 
 }

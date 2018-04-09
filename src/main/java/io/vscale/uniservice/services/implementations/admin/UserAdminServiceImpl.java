@@ -1,8 +1,10 @@
 package io.vscale.uniservice.services.implementations.admin;
 
-import io.vscale.uniservice.domain.*;
+import io.vscale.uniservice.domain.RoleType;
+import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.forms.rest.NewUserForm;
 import io.vscale.uniservice.repositories.data.UserRepository;
+import io.vscale.uniservice.repositories.indexing.UserESRepository;
 import lombok.AllArgsConstructor;
 
 import io.vscale.uniservice.security.states.UserState;
@@ -25,10 +27,11 @@ import java.util.Optional;
 public class UserAdminServiceImpl implements UserAdminService {
 
     private UserRepository userRepository;
+    private UserESRepository userESRepository;
     private RoleTypeService roleTypeService;
 
     @Override
-    public void addNewUser(NewUserForm newUserForm) {
+    public void addNewUserREST(NewUserForm newUserForm) {
 
         Optional<RoleType> roleType = this.roleTypeService.getRoleTypeByRole(newUserForm.getRole());
 
@@ -43,6 +46,7 @@ public class UserAdminServiceImpl implements UserAdminService {
                         .build();
 
         this.userRepository.save(user);
+        this.userESRepository.save(user);
 
     }
 }

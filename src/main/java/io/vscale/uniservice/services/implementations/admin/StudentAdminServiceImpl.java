@@ -7,6 +7,7 @@ import io.vscale.uniservice.forms.rest.StudentForm;
 import io.vscale.uniservice.repositories.data.GroupRepository;
 import io.vscale.uniservice.repositories.data.ProfileRepository;
 import io.vscale.uniservice.repositories.data.StudentRepository;
+import io.vscale.uniservice.repositories.indexing.StudentESRepository;
 import io.vscale.uniservice.services.interfaces.admin.StudentAdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,11 @@ public class StudentAdminServiceImpl implements StudentAdminService{
 
     private ProfileRepository profileRepository;
     private StudentRepository studentRepository;
+    private StudentESRepository studentESRepository;
     private GroupRepository groupRepository;
 
     @Override
-    public void makeStudent(StudentForm studentForm) {
+    public void makeRESTStudent(StudentForm studentForm) {
 
         Profile profile = this.profileRepository.findOne(studentForm.getProfileId());
 
@@ -44,6 +46,7 @@ public class StudentAdminServiceImpl implements StudentAdminService{
                                  .build();
 
         this.studentRepository.save(student);
+        this.studentESRepository.save(student);
 
     }
 }

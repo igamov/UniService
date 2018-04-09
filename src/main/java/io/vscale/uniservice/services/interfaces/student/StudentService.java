@@ -2,6 +2,7 @@ package io.vscale.uniservice.services.interfaces.student;
 
 import io.vscale.uniservice.domain.Group;
 import io.vscale.uniservice.domain.Student;
+import io.vscale.uniservice.forms.general.StudentForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,11 @@ public interface StudentService {
     List<Student> getAllStudents();
     Student getStudentById(Long studentId);
     Page<Student> findAll(Pageable pageable);
+    Page<Student> retrieveSortedStudentsAsc(Pageable pageable);
+    Page<Student> retrieveSortedStudentsDesc(Pageable pageable);
+
+    void addStudent(StudentForm studentForm);
+    void updateStudent(StudentForm studentForm);
+    void deleteStudent(StudentForm studentForm);
 
 }

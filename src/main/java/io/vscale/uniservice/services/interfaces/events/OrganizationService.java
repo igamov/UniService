@@ -30,4 +30,7 @@ public interface OrganizationService {
 
     Page<Organization> findAll(Pageable pageable);
 
+    Page<Organization> retrieveSortedOrganizationsAsc(Pageable pageable);
+    Page<Organization> retrieveSortedOrganizationsDesc(Pageable pageable);
+
 }

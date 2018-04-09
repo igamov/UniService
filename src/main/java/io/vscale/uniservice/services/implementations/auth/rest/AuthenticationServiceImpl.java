@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 /**
  * 01.04.2018
  *
- * @author Andrey Romanov (steampart@gmail.com)
+ * @author Andrey Romanov
  * @version 1.0
  */
 @Service("restAuthenticationService")

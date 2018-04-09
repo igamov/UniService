@@ -1,8 +1,10 @@
 package io.vscale.uniservice.security.config;
 
+import io.vscale.uniservice.interceptors.ResourceInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
@@ -22,4 +24,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         argumentResolvers.add(resolver);
         super.addArgumentResolvers(argumentResolvers);
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+
+        registry.addInterceptor(new ResourceInterceptor(System.currentTimeMillis()));
+
+    }
+
 }

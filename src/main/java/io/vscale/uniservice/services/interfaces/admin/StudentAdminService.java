@@ -9,5 +9,5 @@ import io.vscale.uniservice.forms.rest.StudentForm;
  * @version 1.0
  */
 public interface StudentAdminService {
-    void makeStudent(StudentForm studentForm);
+    void makeRESTStudent(StudentForm studentForm);
 }

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Builder;
 import lombok.ToString;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -43,6 +44,7 @@ import java.util.Set;
 @ToString(exclude = {"profile", "roles"})
 @Entity(name = "User")
 @Table(name = "`user`")
+@Document(indexName = "user", type = "users")
 public class User {
 
     @Id

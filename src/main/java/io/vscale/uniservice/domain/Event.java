@@ -63,6 +63,9 @@ public class Event {
     @Column(name = "event_date")
     private Timestamp eventDate;
 
+    @Column(name = "event_type_name")
+    private String eventTypeName;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "event_to_type",
                joinColumns = @JoinColumn(name = "event_id"),

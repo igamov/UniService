@@ -48,7 +48,7 @@ public class UserController {
             return "redirect:/register";
         }
 
-        this.userAdminService.addNewUser(newUserForm);
+        this.userAdminService.addNewUserREST(newUserForm);
 
         return "admin/success_page";
 
