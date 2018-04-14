@@ -39,4 +39,32 @@ public class OrganizationController {
 
     }
 
+    @GetMapping("/organizations/asc")
+    public ModelAndView showOrganizationsAsc(@PageableDefault(value = 4) Pageable pageable){
+
+        PageWrapper<Organization> pageWrapper =
+                    new PageWrapper<>(this.organizationService.retrieveSortedOrganizationsAsc(pageable),
+                                                                    "/admin/organizations/asc");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/admin-organizations");
+        modelAndView.addObject("pageWrapper", pageWrapper);
+
+        return modelAndView;
+    }
+
+    @GetMapping("/organizations/desc")
+    public ModelAndView showOrganizationsDesc(@PageableDefault(value = 4) Pageable pageable){
+
+        PageWrapper<Organization> pageWrapper =
+                new PageWrapper<>(this.organizationService.retrieveSortedOrganizationsDesc(pageable),
+                                                                       "/admin/organizations/desc");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/admin-organizations");
+        modelAndView.addObject("pageWrapper", pageWrapper);
+
+        return modelAndView;
+    }
+
 }

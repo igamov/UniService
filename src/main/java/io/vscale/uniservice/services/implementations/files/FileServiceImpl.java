@@ -1,13 +1,19 @@
 package io.vscale.uniservice.services.implementations.files;
 
 import io.vscale.uniservice.domain.FileOfService;
+import io.vscale.uniservice.domain.Profile;
+import io.vscale.uniservice.domain.User;
 import io.vscale.uniservice.repositories.data.FileOfServiceRepository;
+import io.vscale.uniservice.repositories.data.ProfileRepository;
+import io.vscale.uniservice.services.interfaces.auth.AuthenticationService;
 import io.vscale.uniservice.services.interfaces.files.FileService;
 import io.vscale.uniservice.utils.FileStorageUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,16 +32,23 @@ import java.util.List;
 @Service
 public class FileServiceImpl implements FileService {
 
-    private FileOfServiceRepository filesRepository;
-    private FileStorageUtil fileStorageUtil;
+    private final FileOfServiceRepository filesRepository;
+    private final FileStorageUtil fileStorageUtil;
+    private final AuthenticationService authenticationService;
+    private final ProfileRepository profileRepository;
 
     @Value("${storage.path}")
     private String storagePath;
 
     @Autowired
-    public FileServiceImpl(FileOfServiceRepository repository, FileStorageUtil fileStorageUtil){
+    public FileServiceImpl(FileOfServiceRepository repository, FileStorageUtil fileStorageUtil,
+                           @Qualifier("generalAuthenticationService")
+                                   AuthenticationService authenticationService,
+                           ProfileRepository profileRepository){
         this.filesRepository = repository;
         this.fileStorageUtil = fileStorageUtil;
+        this.authenticationService = authenticationService;
+        this.profileRepository = profileRepository;
     }
 
     @Override
@@ -65,11 +78,16 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void delete(FileOfService file) {
-        this.filesRepository.delete(file);
-        File storagedFile = new File(this.storagePath + "\\"+ file.getEncodedName());
-        if (storagedFile.exists()){
-            storagedFile.delete();
+        filesRepository.delete(file);
+        String path = storagePath + "/"+ file.getEncodedName();
+        File storagedFile = new File(path);
+
+        if(storagedFile.delete()){
+            System.out.println("!!/n!!!!/n!!"+ storagedFile.getName() + " is deleted!");
+        }else{
+            System.out.println("!!/n!!!!/n!!" + "Delete operation is failed.");
         }
+
     }
 
     @SneakyThrows
@@ -83,5 +101,26 @@ public class FileServiceImpl implements FileService {
         IOUtils.copy(inputStream, response.getOutputStream());
         // пробрасываем буфер
         response.flushBuffer();
+    }
+
+
+    @Override
+    public String savePhoto(MultipartFile file, Authentication authentication) {
+        FileOfService fileOfService = fileStorageUtil.convertFromMultipart(file);
+
+        filesRepository.save(fileOfService);
+
+        User user = authenticationService.getUserByAuthentication(authentication);
+        Profile profile = user.getProfile();
+
+        if (profile.getAvatar() != null) {
+            delete(profile.getAvatar());
+        }
+        profile.setAvatar(fileOfService);
+        profileRepository.save(profile);
+
+        fileStorageUtil.copyToStorage(file, fileOfService.getEncodedName());
+
+        return fileOfService.getEncodedName();
     }
 }

@@ -23,6 +23,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findAllByOrderBySurnameAsc();
 
     @Query(value = "SELECT * FROM student LEFT JOIN profile ON profile.id = student.profile_id " +
-                                                                   "ORDER BY profile.surname DESC", nativeQuery = true)
+                                                                   "ORDER BY profile.surname DESC OFFSET 5", nativeQuery = true)
     List<Student> findAllByOrderBySurnameDesc();
 }

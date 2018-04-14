@@ -1,26 +1,30 @@
 package io.vscale.uniservice.services.implementations.student;
 
-import io.vscale.uniservice.domain.Profile;
+import io.vscale.uniservice.domain.*;
+import io.vscale.uniservice.forms.general.NewEventForm;
 import io.vscale.uniservice.forms.general.StudentForm;
+import io.vscale.uniservice.repositories.data.EventRepository;
 import io.vscale.uniservice.repositories.data.ProfileRepository;
+import io.vscale.uniservice.repositories.indexing.EventESRepository;
 import io.vscale.uniservice.repositories.indexing.StudentESRepository;
 import lombok.AllArgsConstructor;
 
-import io.vscale.uniservice.domain.Group;
-import io.vscale.uniservice.domain.Student;
 import io.vscale.uniservice.repositories.data.StudentRepository;
 import io.vscale.uniservice.services.interfaces.student.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
@@ -34,8 +38,10 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private StudentRepository studentRepository;
+    private EventRepository eventRepository;
     private ProfileRepository profileRepository;
     private StudentESRepository studentESRepository;
+    private EventESRepository eventESRepository;
 
     @Override
     public List<Student> getStudentsByGroup(Group group) {
@@ -128,6 +134,55 @@ public class StudentServiceImpl implements StudentService {
 
         this.studentRepository.delete(studentForm.getId());
         this.studentESRepository.delete(String.valueOf(studentForm.getId()));
+
+    }
+
+    @Override
+    public void addEvent(NewEventForm newEventForm) {
+
+        Event event = Event.builder()
+                           .name(newEventForm.getTitle())
+                           .eventDate(Timestamp.valueOf(newEventForm.getEventDate()))
+                           .description(newEventForm.getDescription())
+                           .build();
+
+        this.eventRepository.save(event);
+        this.eventESRepository.save(event);
+
+        Student student = this.studentRepository.findOne(newEventForm.getStudentId());
+
+        if(student.getEvents() == null){
+            student.setEvents(Collections.singletonList(event));
+        }else{
+            student.getEvents().add(event);
+        }
+
+        this.studentRepository.save(student);
+        this.studentESRepository.save(student);
+
+    }
+
+    @Override
+    public List<Event> getStudentEvents(Student student) {
+        return student.getEvents();
+    }
+
+    @Override
+    public Integer getMarksSum(Student student) {
+
+        AtomicInteger result = new AtomicInteger();
+        result.set(0);
+
+        List<Event> events = student.getEvents();
+
+        events.forEach(event ->
+                            result.set(result.get() + event.getEventTypeEvaluations()
+                                                           .stream()
+                                                           .mapToInt(EventTypeEvaluation::getFinalValue)
+                                                           .sum())
+        );
+
+        return result.get();
 
     }
 }

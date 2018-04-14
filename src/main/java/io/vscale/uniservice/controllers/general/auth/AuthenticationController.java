@@ -59,7 +59,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/authorize")
-    public String root(Authentication authentication){
+    public String root(Authentication authentication, ModelMap map){
 
         if(authentication != null){
 
@@ -67,7 +67,8 @@ public class AuthenticationController {
 
             if(user.getRoles().size() > 1){
 
-                return "redirect:/choose_role";
+                map.put("role_check", true);
+                return "index";
 
             }else{
 
@@ -89,26 +90,22 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping("/choose_role")
-    public String redirectByRole(Authentication authentication, @RequestParam("role") String role){
+    @GetMapping("/cooperator_auth")
+    public String cooperatorAuth(Authentication authentication){
 
         if(authentication != null){
+            return "redirect:/cooperator/index";
+        }
 
-            Role[] roles = Role.values();
+        return "redirect:/login";
 
-            boolean roleCheck = Arrays.stream(roles)
-                                      .anyMatch(role1 -> role1.toString().equals(role));
+    }
 
-            if(!roleCheck){
-                return "redirect:/login";
-            }else{
+    @GetMapping("/admin_auth")
+    public String adminAuth(Authentication authentication){
 
-                StringBuilder sb = new StringBuilder();
-                sb.append("redirect:/").append(role).append("/index");
-                return sb.toString();
-
-            }
-
+        if(authentication != null){
+            return "redirect:/admin/index";
         }
 
         return "redirect:/login";

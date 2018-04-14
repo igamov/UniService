@@ -5,13 +5,10 @@ import io.vscale.uniservice.services.interfaces.admin.StudentAdminService;
 import io.vscale.uniservice.services.interfaces.student.StudentService;
 import io.vscale.uniservice.utils.PageWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.AllArgsConstructor;
@@ -44,13 +41,11 @@ public class StudentController {
 
     }
 
-    @PostMapping("/students/asc")
+    @GetMapping("/students/asc")
     public ModelAndView showStudentsAsc(@PageableDefault(value = 4) Pageable pageable){
 
-        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-                                                  Sort.Direction.ASC, "profile.surname");
         PageWrapper<Student> pageWrapper =
-                new PageWrapper<>(this.studentService.findAll(pageRequest), "/admin/students/asc");
+                new PageWrapper<>(this.studentService.retrieveSortedStudentsAsc(pageable), "/admin/students/asc");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-students");
@@ -60,13 +55,11 @@ public class StudentController {
 
     }
 
-    @PostMapping("/students/desc")
+    @GetMapping("/students/desc")
     public ModelAndView showStudentsDesc(@PageableDefault(value = 4) Pageable pageable){
 
-        PageRequest pageRequest = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-                                                  Sort.Direction.DESC, "profile.surname");
         PageWrapper<Student> pageWrapper =
-                new PageWrapper<>(this.studentService.findAll(pageRequest), "/admin/students/desc");
+                new PageWrapper<>(this.studentService.retrieveSortedStudentsDesc(pageable), "/admin/students/desc");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/admin-students");

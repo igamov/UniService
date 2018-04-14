@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
@@ -63,7 +64,7 @@ public class FileOfService {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "files")
     private Set<Event> events;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "group_statistics",
                joinColumns = @JoinColumn(name = "coop_file_id"),
                inverseJoinColumns = @JoinColumn(name = "cooperator_id"))
@@ -77,5 +78,8 @@ public class FileOfService {
                joinColumns = @JoinColumn(name = "org_file_id"),
                inverseJoinColumns = @JoinColumn(name = "file_organization_id"))
     private Set<Organization> organizations;
+
+    @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Profile profile;
 
 }

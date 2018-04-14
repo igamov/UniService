@@ -106,8 +106,8 @@
                                         </div>
                                         <div class="user-info" th:each="description : ${event.eventTypeEvaluations}">
                                             <p th:inline="text"><span>Тип мероприятия:</span>[[${description.type}]]</p>
-                                            <p th:inline="text"><span>Дата:</span>[[${event.eventDate}}]]</p>
-                                            <p th:inline="text"><span>Описание:</span>[[${event.description}}]]</p>
+                                            <p th:inline="text"><span>Дата:</span>[[${event.eventDate}]]</p>
+                                            <p th:inline="text"><span>Описание:</span>[[${event.description}]]</p>
                                         </div>
                                     </div>
                                 </div>
@@ -115,6 +115,24 @@
                         </div>
 
                     </div>
+
+                    <div class="pagination-list">
+                        <ul class="pagination">
+                            <li class="pagination__item">
+                                <a th:href="@{${pageWrapper.url}(page = ${pageWrapper.currentNumber - 1})}"
+                                   class="pagination__number">←<span class="pagination__control pagination__control_prev">prev</span>
+                                </a></li>
+                            <li class="pagination__item" th:each="item : ${pageWrapper.items}">
+                                <a th:href='@{${pageWrapper.url}(page=${item.number})}'
+                                   class="pagination__number pagination__number_active"
+                                   th:text='${item.number}'>1</a>
+                            </li>
+                            <li class="pagination__item">
+                                <a th:href="@{${pageWrapper.url}(page = ${pageWrapper.currentNumber + 1})}" class="pagination__number">
+                                    <span class="pagination__control pagination__control_next">next</span>→</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>

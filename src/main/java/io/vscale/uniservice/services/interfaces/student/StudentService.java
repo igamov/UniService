@@ -1,7 +1,9 @@
 package io.vscale.uniservice.services.interfaces.student;
 
+import io.vscale.uniservice.domain.Event;
 import io.vscale.uniservice.domain.Group;
 import io.vscale.uniservice.domain.Student;
+import io.vscale.uniservice.forms.general.NewEventForm;
 import io.vscale.uniservice.forms.general.StudentForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,5 +29,9 @@ public interface StudentService {
     void addStudent(StudentForm studentForm);
     void updateStudent(StudentForm studentForm);
     void deleteStudent(StudentForm studentForm);
+
+    void addEvent(NewEventForm newEventForm);
+    List<Event> getStudentEvents(Student student);
+    Integer getMarksSum(Student student);
 
 }
