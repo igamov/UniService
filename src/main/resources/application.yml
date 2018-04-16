@@ -1,0 +1,6 @@
+# AWS bucket
+amazonProperties:
+  endpointUrl: https://s3-us-west-2.amazonaws.com
+  accessKey: AKIAJM5HJL3OF2EIQQDQ
+  secretKey: 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
+  bucketName: uniservice

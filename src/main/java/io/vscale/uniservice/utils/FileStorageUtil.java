@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -20,46 +24,37 @@ import java.util.UUID;
 @Component
 public class FileStorageUtil {
 
-    @Value("${storage.path}")
-    private String storagePath;
+    @Value("${amazonProperties.endpointUrl}")
+    private String endpointUrl;
 
-    @Value("${url.path}")
-    private String urlPath;
-
-    public String getStoragePath() {
-        return storagePath;
-    }
-
-    @SneakyThrows
-    public void copyToStorage(MultipartFile file, String storageFileName) {
-        Files.copy(file.getInputStream(), Paths.get(storagePath, storageFileName));
-    }
+    @Value("${amazonProperties.bucketName}")
+    private String bucketName;
 
     public FileOfService convertFromMultipart(MultipartFile file) {
-        // получаем название файла
         String originalFileName = file.getOriginalFilename();
-        // вытаскиваем контент-тайп
         String type = file.getContentType();
 
-        // создаем имя файла
-        String storageName = createStorageName(originalFileName);
-        // получаем urlPath файла по которому он будет доступен внутри системы
-        String fileUrl = getUrlOfFile(storageName);
+        String storageName = generateFileName(file);
+
+        String fileUrl =  endpointUrl + "/" + bucketName + "/" + storageName;
         return FileOfService.builder()
-                            .originalName(originalFileName)
-                            .encodedName(storageName)
-                            .url(fileUrl)
-                            .type(type)
-                            .build();
+                .originalName(originalFileName)
+                .encodedName(storageName)
+                .url(fileUrl)
+                .type(type)
+                .build();
     }
 
-    private String getUrlOfFile(String storageFileName) {
-        return urlPath + "\\" + storageFileName;
+    public String generateFileName(MultipartFile multiPart) {
+        return new Date().getTime() + "-" + multiPart.getOriginalFilename().replace(" ", "_");
     }
 
-    private String createStorageName(String originalFileName) {
-        String extension = FilenameUtils.getExtension(originalFileName);
-        String newFileName = UUID.randomUUID().toString();
-        return newFileName + "." + extension;
+    public File convertMultiPartToFile(MultipartFile file) throws IOException {
+        File convFile = new File(file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
     }
+
 }
