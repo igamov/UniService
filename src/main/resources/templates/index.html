@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+
+    <title>UniService</title>
+    <meta name="description" content=""/>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#fff"/>
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#fff"/>
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#fff"/>
+
+    <link rel="stylesheet" th:href="@{/css/main.min.css(v=${v})}"/>
+</head>
+
+<body>
+<div class="content">
+
+    <header>
+        <nav class="header-container">
+            <a class="logo">UniService</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="panel col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8
+         col-xs-offset-2 centered">
+            <div class="welcome">
+                <h1 class="h1">Добро пожаловать на UniService!</h1>
+                <p>Навигация по внеучебной жизни университета</p>
+            </div>
+
+            <div class="alert" th:if="${model ne null and model.error ne null and model.error.isPresent()}">
+                Неправильно введён логин/пароль. Попробуйте ещё раз. Если ввод верен - свяжитесь с UniServiceTeam
+            </div>
+            <form name='form-login' th:action="@{/login}" method="POST">
+                <div class="input-box">
+                    <input type="text" name="login" placeholder="Логин" autofocus = "true" required = "true"/>
+                    <span><i class="far fa-user-circle"></i></span>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" placeholder="Пароль" required = "true"/>
+                    <span><i class="fas fa-lock"></i></span>
+                </div>
+                <div class="input-box">
+                    <label class="remember-me"><input name="" value="remember" type="checkbox"/> &nbsp;Запомнить
+                        меня</label>
+                </div>
+                <button th:if="${role_check == null}" class="enter-button" type="submit" value="Войти">Войти</button>
+            </form>
+
+            <button th:if="${role_check ne null}" class="enter-button" type="button"
+                    data-toggle="modal" data-target="#myModal">Войти</button>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Выберите роль</h4>
+                            <button th:href="@{/admin_auth}" class="modal-button" type="submit" value="Войти">Войти как администратор</button>
+                            <button th:href="@{/cooperator_auth}" class="modal-button" type="submit" value="Войти">Войти как сотрудник </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-text">2018, UniService Team
+            <div class="social-media">
+                <a href="https://vk.com/itis_kpfu"><i class="fab fa-vk fa-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script th:src="@{/js/scripts.min.js(v=${v})}"></script>
+
+</body>
+</html>
