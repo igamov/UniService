@@ -67,4 +67,26 @@ public class OrganizationController {
         return modelAndView;
     }
 
+    @GetMapping("/organizations/show/id")
+    public ModelAndView showOrganization(){
+
+        return new ModelAndView("organizations/view-organization");
+
+    }
+
+
+    @GetMapping("/organizations/create")
+    public ModelAndView createOrganization(){
+
+        return new ModelAndView("organizations/create-organization");
+
+    }
+
+    @GetMapping("/organizations/edit/id")
+    public ModelAndView editOrganization(){
+
+        return new ModelAndView("organizations/edit-organization");
+
+    }
+
 }

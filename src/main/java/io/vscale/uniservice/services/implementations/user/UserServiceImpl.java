@@ -1,6 +1,6 @@
 package io.vscale.uniservice.services.implementations.user;
 
-import io.vscale.uniservice.services.interfaces.files.FileService;
+import io.vscale.uniservice.services.interfaces.storage.StorageService;
 import lombok.AllArgsConstructor;
 
 import io.vscale.uniservice.domain.RoleType;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private FileService fileService;
+    private StorageService storageService;
 
     @Override
     public List<User> getUsersByRole(RoleType roleType) {
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String savePhoto(MultipartFile file, Authentication authentication) {
-        return fileService.savePhoto(file, authentication);
+        return storageService.savePhoto(file, authentication);
     }
 
 }

@@ -77,13 +77,13 @@ public class Profile {
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Confirmation> confirmations;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "event_manager",
                joinColumns = @JoinColumn(name = "manager_id"),
                inverseJoinColumns = @JoinColumn(name = "manage_event_id"))
     private Set<Event> manageEvents;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "avatar_id")
     private FileOfService avatar;
 

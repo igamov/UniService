@@ -2,6 +2,8 @@ package io.vscale.uniservice.repositories.data;
 
 import io.vscale.uniservice.domain.Organization;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -13,7 +15,10 @@ import java.util.List;
  */
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    List<Organization> findAllByOrderByTitleAsc();
-    List<Organization> findAllByOrderByTitleDesc();
+    @Query(value = "SELECT * FROM organization ORDER BY title ASC LIMIT 4 OFFSET :number", nativeQuery = true)
+    List<Organization> findAllByOrderByTitleAsc(@Param("number") Long number);
+
+    @Query(value = "SELECT * FROM organization ORDER BY title DESC LIMIT 4 OFFSET :number", nativeQuery = true)
+    List<Organization> findAllByOrderByTitleDesc(@Param("number") Long number);
 
 }

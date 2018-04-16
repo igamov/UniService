@@ -60,7 +60,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-3">
-                    <div class="filter-data">
+                    <div class="create-box">
+                        <button class="create-button">Добавить сотрудника</button>
+                    </div>
+                    <div class="small-box">
                         <div class="select-box">
                             <form action="#" method="post">
                                 <div class="select-item">
@@ -81,7 +84,6 @@
                 <div class="col-lg-9 col-md-9 col-sm-8 col-xs-9 right-col">
                     <div class="data-list">
                         <div class="title-data">
-                            <h1 class="h1">Сотрудники</h1>
                             <div class="sort-select title-sort">
                                 <select title="">
                                     <option>Сортировать</option>
@@ -89,6 +91,13 @@
                                     <option>По фамилии Я-А</option>
                                 </select>
                                 <div class="select__arrow"></div>
+                            </div>
+                            <h1 class="h1">Сотрудники</h1>
+                            <div class="search-title">
+                                <div class="search-box">
+                                    <input type="search" id="search" placeholder="Поиск..." />
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
 
@@ -111,8 +120,8 @@
                                         </div>
                                         <div class="user-info">
                                             <p th:inline = "text"><span>E-mail:</span>[[${cooperator.profile.email}]]</p>
-                                            <p th:inline = "text"><span>Должность:</span>[[${cooperator.appointment}}]]</p>
-                                            <p th:inline = "text"><span>Стаж:</span>[[${cooperator.recordOfService}}]]</p>
+                                            <p th:inline = "text"><span>Должность:</span>[[${cooperator.appointment}]]</p>
+                                            <p th:inline = "text"><span>Стаж:</span>[[${cooperator.recordOfService}]]</p>
                                         </div>
                                     </div>
                                 </div>

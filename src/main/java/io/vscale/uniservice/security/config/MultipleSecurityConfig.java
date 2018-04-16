@@ -75,6 +75,7 @@ public class MultipleSecurityConfig {
                   .antMatchers("/js/**").permitAll()
                   .antMatchers("/fonts/**").permitAll()
                   .antMatchers("/img/**").permitAll()
+                  .antMatchers("/storage/**").permitAll()
                   .antMatchers("/").permitAll()
                   .anyRequest().authenticated()
                 .and()

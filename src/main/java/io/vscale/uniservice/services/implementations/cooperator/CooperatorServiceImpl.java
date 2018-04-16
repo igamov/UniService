@@ -50,26 +50,22 @@ public class CooperatorServiceImpl implements CooperatorService{
     @Override
     public Page<Cooperator> retrieveAllCooperatorsAsc(Pageable pageable) {
 
-        List<Cooperator> cooperators = this.cooperatorRepository.findAllByOrderBySurnameAsc();
+        Long number = (long) (pageable.getPageNumber() + 3);
 
-        int start = pageable.getOffset();
-        int end = (start + pageable.getPageSize() ) > cooperators.size() ?
-                                                                 cooperators.size() : (start + pageable.getPageSize() );
+        List<Cooperator> cooperators = this.cooperatorRepository.findAllByOrderBySurnameAsc(number);
 
-        return new PageImpl<>(cooperators.subList(start, end), pageable, cooperators.size());
+        return new PageImpl<>(cooperators, pageable, cooperators.size());
 
     }
 
     @Override
     public Page<Cooperator> retrieveAllCooperatorsDesc(Pageable pageable) {
 
-        List<Cooperator> cooperators = this.cooperatorRepository.findAllByOrderBySurnameDesc();
+        Long number = (long) (pageable.getPageNumber() + 3);
 
-        int start = pageable.getOffset();
-        int end = (start + pageable.getPageSize() ) > cooperators.size() ?
-                                                                cooperators.size() : (start + pageable.getPageSize() );
+        List<Cooperator> cooperators = this.cooperatorRepository.findAllByOrderBySurnameDesc(number);
 
-        return new PageImpl<>(cooperators.subList(start, end), pageable, cooperators.size());
+        return new PageImpl<>(cooperators, pageable, cooperators.size());
 
     }
 

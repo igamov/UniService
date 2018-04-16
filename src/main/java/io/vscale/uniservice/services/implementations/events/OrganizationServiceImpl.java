@@ -67,26 +67,22 @@ public class OrganizationServiceImpl implements OrganizationService{
     @Override
     public Page<Organization> retrieveSortedOrganizationsAsc(Pageable pageable) {
 
-        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleAsc();
+        Long number = (long) (pageable.getPageNumber() + 3);
 
-        int start = pageable.getOffset();
-        int end = (start + pageable.getPageSize() ) > organizations.size() ?
-                                                               organizations.size() : (start + pageable.getPageSize());
+        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleAsc(number);
 
-        return new PageImpl<>(organizations.subList(start, end), pageable, organizations.size());
+        return new PageImpl<>(organizations, pageable, organizations.size());
 
     }
 
     @Override
     public Page<Organization> retrieveSortedOrganizationsDesc(Pageable pageable) {
 
-        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleDesc();
+        Long number = (long) (pageable.getPageNumber() + 3);
 
-        int start = pageable.getOffset();
-        int end = (start + pageable.getPageSize() ) > organizations.size() ?
-                                                               organizations.size() : (start + pageable.getPageSize());
+        List<Organization> organizations = this.organizationRepository.findAllByOrderByTitleDesc(number);
 
-        return new PageImpl<>(organizations.subList(start, end), pageable, organizations.size());
+        return new PageImpl<>(organizations, pageable, organizations.size());
 
     }
 }

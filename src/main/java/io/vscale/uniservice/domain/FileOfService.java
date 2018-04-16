@@ -64,7 +64,7 @@ public class FileOfService {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "files")
     private Set<Event> events;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "group_statistics",
                joinColumns = @JoinColumn(name = "coop_file_id"),
                inverseJoinColumns = @JoinColumn(name = "cooperator_id"))
@@ -79,7 +79,7 @@ public class FileOfService {
                inverseJoinColumns = @JoinColumn(name = "file_organization_id"))
     private Set<Organization> organizations;
 
-    @OneToOne(mappedBy = "avatar")
+    @OneToOne(mappedBy = "avatar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Profile profile;
 
 }

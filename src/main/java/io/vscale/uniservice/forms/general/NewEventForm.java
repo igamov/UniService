@@ -26,6 +26,7 @@ public class NewEventForm {
     private Long id;
     private String title;
     private String eventDate;
+    private String description;
     private Long studentId;
 
 }

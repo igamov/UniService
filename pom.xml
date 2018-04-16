@@ -21,6 +21,7 @@
         <h2.version>1.4.196</h2.version>
         <commons-io.version>2.6</commons-io.version>
         <poi-excel.version>3.17</poi-excel.version>
+        <aws-java-sdk.version>1.11.133</aws-java-sdk.version>
 
     </properties>
 
@@ -122,6 +123,12 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi-excel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>${aws-java-sdk.version}</version>
         </dependency>
 
     </dependencies>
