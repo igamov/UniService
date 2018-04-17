@@ -98,7 +98,7 @@ public class StorageServiceImpl implements StorageService {
         FileOfService file = filesRepository.findOneByEncodedName(fileName);
         response.setContentType(file.getType());
 
-        S3Object object = s3Client.getObject(new GetObjectRequest(bucketName, accessKey));
+        S3Object object = s3Client.getObject(new GetObjectRequest(bucketName, fileName));
         InputStream inputStream = object.getObjectContent();
 
         IOUtils.copy(inputStream, response.getOutputStream());

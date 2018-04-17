@@ -30,13 +30,16 @@ public class FileStorageUtil {
     @Value("${amazonProperties.bucketName}")
     private String bucketName;
 
+    @Value("${url.path}")
+    private String urlPath;
+
     public FileOfService convertFromMultipart(MultipartFile file) {
         String originalFileName = file.getOriginalFilename();
         String type = file.getContentType();
 
         String storageName = generateFileName(file);
 
-        String fileUrl =  endpointUrl + "/" + bucketName + "/" + storageName;
+        String fileUrl =  urlPath + "/" + storageName;
         return FileOfService.builder()
                 .originalName(originalFileName)
                 .encodedName(storageName)
