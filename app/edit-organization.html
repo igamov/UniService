@@ -2,22 +2,22 @@
 <html lang="ru">
 <head>
 
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
-	<title>UniService</title>
-	<meta name="description" content="">
+    <title>UniService</title>
+    <meta name="description" content="">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- Chrome, Firefox OS and Opera -->
-	<meta name="theme-color" content="#fff">
-	<!-- Windows Phone -->
-	<meta name="msapplication-navbutton-color" content="#fff">
-	<!-- iOS Safari -->
-	<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#fff">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#fff">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
 
-	<link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/main.min.css">
 </head>
 
 <body>
@@ -58,11 +58,61 @@
 
     <div class="main-content">
         <div class="container-fluid">
-            <div class="row">
+            <div class="extra-container">
+                <div class="small-box">
+                    <div class="row">
+                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3 edit-container">
 
+                            <div class="description-box">
+                                <div class="row">
+                                    <div class="col-sm-12 col-xs-4">
+                                        <h3>Сменить фото</h3>
+                                        <img class="center-block img-rounded" src="img/default-user.png" alt="Organization">
+                                        <form enctype="multipart/form-data" method="post">
+                                            <p><input class="upload-input" type="file" name="upload" accept="image/jpeg,image/png"></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                <div class="col-lg-8 col-md-9 col-sm-9 col-xs-9 right-col edit-container vertical-line">
+                        <div class="info-edit">
+                            <h2>Редактировать</h2>
+                            <div class="row">
+                                <div class="input-box">
+                                    <label for="name">Название:</label>
+                                    <input id="name" type="text" name="login" placeholder="Логин">
+                                </div>
+                                <div class="input-box">
+                                    <label for="name">Руководитель:</label>
+                                    <input id="name" type="text" name="login" placeholder="Логин">
+                                </div>
+                                <div class="input-box">
+                                    <label for="name">Тип:</label>
+                                    <select title="">
+                                        <option>Не выбрано</option>
+                                        <option>Фильтр 1</option>
+                                        <option>Фильтр 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="name">Описание:</label>
+                                    <textarea id="name" type="text" name="login" placeholder="Логин"></textarea>
+                                </div>
+                                <div class="button-container">
+                                    <button class="create-button upload-button" type="submit">Отправить</button>
+                                    <button class="create-button upload-button" type="reset">Отмена</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <footer>

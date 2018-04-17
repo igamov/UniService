@@ -73,10 +73,20 @@
             line-height: 3
     .create-button
         font-size: 12px
-
-
+@media only screen and (max-width : 1024px)
+    .modal-header
+        font-size: 14px
+    .modal-title
+        font-size: 17px
+    .list-item-users
+        .user-picture
+            width: 100px
+        .user-title
+            .user-name
+                font-size: 15px
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px)
+
 
     .main-content
         width: 95%
@@ -162,6 +172,15 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px)
+    .list-item-users
+        .col-xs-4
+            width: 33.33333%
+        .col-xs-8
+            width: 66.66666%
+        .user-data
+            font-size: 12px
+            .user-title .user-name
+                font-size: 14px
     .col-xs-4, .col-xs-8
         width: 100%
     #menu
@@ -297,6 +316,7 @@
         padding: 10px
 
 @media only screen and (max-width : 555px)
+
     .col-xs-4
         width: 33.33333%
 
@@ -357,7 +377,9 @@
         text-align: left
         width: 30%
 
-
+    .list-item-users
+        .user-picture
+            width: 90px
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px)
@@ -447,8 +469,19 @@
             line-height: 2.6
             padding: 0 0 0 5px
             width: 30%
-
-
+    .list-item-users
+        .col-xs-4
+            padding: 0
+        .user-picture
+            width: 80px
+        .user-data
+            font-size: 10px
+            .user-title .user-name
+                font-size: 12px
+    .modal-header
+        font-size: 12px
+        .modal-title
+            font-size: 15px
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 320px)
     .panel
